@@ -12,7 +12,7 @@ Infrastructure
     gateway
     auth
     profile
-    остальные сервисы inbalance
+    остальные сервисы 
 Networking
     Ingress
     домены
