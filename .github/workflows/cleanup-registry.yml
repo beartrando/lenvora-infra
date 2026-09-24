@@ -1,11 +1,7 @@
-name: Cleanup registry
+name: Delete profile service images
 
 on:
-  repository_dispatch:
-    types:
-      - cleanup-registry
-
-run-name: "Cleanup registry - ${{ github.event.client_payload.service }}"
+  workflow_dispatch:
 
 jobs:
   cleanup:
@@ -21,17 +17,18 @@ jobs:
         run: |
           set -e
 
+          echo "=== Getting profile/service versions ==="
+
           gh api \
             --paginate \
             --jq '.[].id' \
-            "/user/packages/container/tic-tac-toe-profile/service/versions?per_page=100" |
+            "/user/packages/container/tic-tac-toe-profile%2Fservice/versions?per_page=100" |
           while read -r VERSION_ID; do
             echo "Deleting version: $VERSION_ID"
 
             gh api \
               --method DELETE \
-              "/user/packages/container/tic-tac-toe-profile/service/versions/$VERSION_ID"
+              "/user/packages/container/tic-tac-toe-profile%2Fservice/versions/$VERSION_ID"
           done
 
-          echo "=== All profile service images deleted ==="
-          
+          echo "=== All profile/service images deleted ==="
