@@ -18,27 +18,35 @@ jobs:
       - name: Cleanup old container versions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGE: ${{ github.event.client_payload.repo }}
+          REPO: ${{ github.event.client_payload.repo }}
         run: |
           set -e
           set -o pipefail
 
-          echo "=== Registry cleanup ==="
-          echo "Package: $PACKAGE"
+          SERVICE_PACKAGE="${REPO}/service"
+          PREDEPLOY_PACKAGE="${REPO}/predeploy"
 
-          gh api \
-            --paginate \
-            -H "Accept: application/vnd.github+json" \
-            "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions?per_page=100" \
-            --jq '.[].id' |
-          tail -n +31 |
-          while read -r VERSION_ID; do
-            echo "Deleting version: $VERSION_ID"
+          echo "=== Registry cleanup ==="
+          echo "Service package: $SERVICE_PACKAGE"
+          echo "Predeploy package: $PREDEPLOY_PACKAGE"
+
+          for PACKAGE in "$SERVICE_PACKAGE" "$PREDEPLOY_PACKAGE"; do
+            echo "=== Cleanup: $PACKAGE ==="
 
             gh api \
-              --method DELETE \
+              --paginate \
               -H "Accept: application/vnd.github+json" \
-              "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions/$VERSION_ID"
+              "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions?per_page=100" \
+              --jq '.[].id' |
+            tail -n +31 |
+            while read -r VERSION_ID; do
+              echo "Deleting version: $VERSION_ID"
+
+              gh api \
+                --method DELETE \
+                -H "Accept: application/vnd.github+json" \
+                "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions/$VERSION_ID"
+            done
           done
 
           echo "=== Cleanup completed ==="
