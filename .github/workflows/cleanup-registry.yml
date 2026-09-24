@@ -5,7 +5,7 @@ on:
     types:
       - cleanup-registry
 
-run-name: "Cleanup registry --- ${{ github.event.client_payload.service }}"
+run-name: "Cleanup registry - ${{ github.event.client_payload.service }}"
 
 jobs:
   cleanup:
