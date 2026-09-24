@@ -28,26 +28,25 @@ jobs:
 
           gh api \
             --paginate \
-            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=100" |
-          jq -r \
-            --argjson keep "$KEEP_COUNT" \
-            --arg protected "$PROTECTED_TAGS" '
-              ($protected | split(" ")) as $protected_tags
-              | sort_by(.created_at)
+            --jq \
+            --arg keep "$KEEP_COUNT" \
+            --arg protected "$PROTECTED_TAGS" \
+            '
+              sort_by(.created_at)
               | reverse
               | [
                   .[]
                   | select(
                       any(
                         (.metadata.container.tags // [])[];
-                        . as $tag
-                        | ($protected_tags | index($tag)) != null
+                        ($protected | split(" ")) | index(.)
                       ) | not
                     )
                 ]
-              | .[$keep:]
+              | .[$keep | tonumber:]
               | .[].id
-            ' |
+            ' \
+            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=100" |
           while read -r VERSION_ID; do
             echo "Deleting version: $VERSION_ID"
 
