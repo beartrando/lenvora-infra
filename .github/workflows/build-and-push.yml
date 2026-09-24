@@ -116,6 +116,7 @@ jobs:
             }
 
   trigger-deploy:
+    needs: build-and-push
     environment: ${{ github.event.client_payload.branch }}
     runs-on: ubuntu-latest
     steps:
@@ -130,6 +131,7 @@ jobs:
           echo "=== End ==="
 
   trigger-cleanup:
+    needs: build-and-push
     environment: ${{ github.event.client_payload.branch }}
     runs-on: ubuntu-latest
     steps:
