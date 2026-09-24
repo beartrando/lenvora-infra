@@ -17,19 +17,19 @@ jobs:
     steps:
       - name: Cleanup registry
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           REPO: ${{ github.event.client_payload.repo }}
         run: |
           set -e
 
           REPO_NAME="${REPO#*/}"
-          KEEP_COUNT=5
+          KEEP_COUNT=3
           PROTECTED_TAGS="dev uat prod"
 
           echo "=== Cleanup registry ==="
           echo "Repository: $REPO"
           echo "Package: $REPO_NAME"
-          echo "Keep: $KEEP_COUNT versions"
+          echo "Keep: $KEEP_COUNT"
           echo "Protected tags: $PROTECTED_TAGS"
 
           for TYPE in service predeploy; do
@@ -37,21 +37,22 @@ jobs:
 
             gh api \
               --paginate \
-              "/user/packages/container/${REPO_NAME}/${TYPE}/versions?per_page=100" |
+              "/user/packages/container/${REPO_NAME}%2F${TYPE}/versions?per_page=100" |
             jq -r \
               --argjson keep "$KEEP_COUNT" \
               --arg protected "$PROTECTED_TAGS" '
+                ($protected | split(" ")) as $protected_tags
+                |
                 sort_by(.created_at)
                 | reverse
                 | [
                     .[]
                     | select(
-                        (.metadata.container.tags // []) as $tags
-                        | ([ $tags[] |
-                            select(
-                              ($protected | split(" ")) | index(.)
-                            )
-                          ] | length) == 0
+                        any(
+                          (.metadata.container.tags // [])[];
+                          . as $tag
+                          | ($protected_tags | index($tag)) != null
+                        ) | not
                       )
                   ]
                 | .[$keep:]
@@ -64,7 +65,7 @@ jobs:
 
               gh api \
                 --method DELETE \
-                "/user/packages/container/${REPO_NAME}/${TYPE}/versions/$VERSION_ID"
+                "/user/packages/container/${REPO_NAME}%2F${TYPE}/versions/$VERSION_ID"
             done
           done
 
