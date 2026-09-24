@@ -38,11 +38,7 @@ jobs:
             | .id
           ' |
           while read -r VERSION_ID; do
-            echo "Deleting $VERSION_ID"
-
-            gh api \
-              --method DELETE \
-              "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions/$VERSION_ID"
+            echo "Version: $VERSION_ID"
           done
 
           echo "=== Cleanup completed ==="
