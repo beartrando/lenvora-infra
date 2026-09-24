@@ -36,9 +36,6 @@ jobs:
                 ) | not
               )
             | .id
-          ' |
-          while read -r VERSION_ID; do
-            echo "Version: $VERSION_ID"
-          done
+          '
 
           echo "=== Cleanup completed ==="
