@@ -21,12 +21,33 @@ jobs:
         run: |
           set -e
 
+          KEEP_COUNT=30
+          PROTECTED_TAGS="uat prod dev"
+
           echo "=== Getting streaming/service versions ==="
 
           gh api \
             --paginate \
-            --jq '.[].id' \
             "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=100" |
+          jq -r \
+            --argjson keep "$KEEP_COUNT" \
+            --arg protected "$PROTECTED_TAGS" '
+              ($protected | split(" ")) as $protected_tags
+              | sort_by(.created_at)
+              | reverse
+              | [
+                  .[]
+                  | select(
+                      any(
+                        (.metadata.container.tags // [])[];
+                        . as $tag
+                        | ($protected_tags | index($tag)) != null
+                      ) | not
+                    )
+                ]
+              | .[$keep:]
+              | .[].id
+            ' |
           while read -r VERSION_ID; do
             echo "Deleting version: $VERSION_ID"
 
@@ -35,4 +56,4 @@ jobs:
               "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions/$VERSION_ID"
           done
 
-          echo "=== All streaming/service images deleted ==="
+          echo "=== Cleanup completed ==="
