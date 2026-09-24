@@ -9,6 +9,7 @@ run-name: "Cleanup registry - ${{ github.event.client_payload.service }}"
 
 jobs:
   cleanup:
+    environment: ${{ github.event.client_payload.branch }}
     runs-on: ubuntu-24.04
 
     permissions:
@@ -26,6 +27,19 @@ jobs:
 
           gh api \
             --paginate \
-            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=${KEEP_COUNT}&page=2" 
+            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=${KEEP_COUNT}&page=2" |
+          jq -r --arg protected "$PROTECTED_TAGS" '
+            .[]
+            | select(
+                any(
+                  (.metadata.container.tags // [])[];
+                  . as $tag | ($protected | split(" ") | index($tag)) != null
+                ) | not
+              )
+            | .id
+          ' |
+          while read -r VERSION_ID; do
+            echo "Version: $VERSION_ID"
+          done
 
           echo "=== Cleanup completed ==="
