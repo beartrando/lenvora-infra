@@ -15,7 +15,7 @@ jobs:
       packages: write
 
     steps:
-      - name: Delete all streaming service images
+      - name: Delete old streaming service images
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -24,31 +24,21 @@ jobs:
           KEEP_COUNT=30
           PROTECTED_TAGS="uat prod dev"
 
-          echo "=== Getting streaming/service versions ==="
-
           gh api \
             --paginate \
-            --jq \
-            --arg keep "$KEEP_COUNT" \
-            --arg protected "$PROTECTED_TAGS" \
-            '
-              sort_by(.created_at)
-              | reverse
-              | [
-                  .[]
-                  | select(
-                      any(
-                        (.metadata.container.tags // [])[];
-                        ($protected | split(" ")) | index(.)
-                      ) | not
-                    )
-                ]
-              | .[$keep | tonumber:]
-              | .[].id
-            ' \
-            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=100" |
+            "/user/packages/container/tic-tac-toe-streaming%2Fservice/versions?per_page=${KEEP_COUNT}&page=2" |
+          jq -r --arg protected "$PROTECTED_TAGS" '
+            .[]
+            | select(
+                any(
+                  (.metadata.container.tags // [])[];
+                  . as $tag | ($protected | split(" ") | index($tag)) != null
+                ) | not
+              )
+            | .id
+          ' |
           while read -r VERSION_ID; do
-            echo "Deleting version: $VERSION_ID"
+            echo "Deleting $VERSION_ID"
 
             gh api \
               --method DELETE \
