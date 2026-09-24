@@ -1,12 +1,12 @@
 [submodule "services/auth"]
 	path = services/auth
-	url = git@github.com:beartrando/auth.git
+	url = git@github.com:beartrando/tic-tac-toe-auth.git
 [submodule "services/gateway"]
         path = services/gateway
-        url = git@github.com:beartrando/gateway.git
+        url = git@github.com:beartrando/tic-tac-toe-gateway.git
 [submodule "services/profile"]
 	path = services/profile
-	url = git@github.com:beartrando/profile.git
+	url = git@github.com:beartrando/tic-tac-toe-profile.git
 [submodule "services/bot"]
 	path = services/bot
 	url = git@github.com:beartrando/tic-tac-toe-bot.git
