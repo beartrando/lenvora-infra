@@ -1,7 +1,9 @@
 name: Delete profile service images
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - cleanup-registry
 
 jobs:
   cleanup:
