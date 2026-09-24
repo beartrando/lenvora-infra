@@ -104,8 +104,23 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           repository: ${{ github.repository }}
           event-type: deploy-gke
-#          event-type: deploy-ssh-k8e
-#          event-type: deploy-ssh-docker-compose
+          #          event-type: deploy-ssh-k8e
+          #          event-type: deploy-ssh-docker-compose
+          client-payload: |
+            {
+              "service": "${{ github.event.client_payload.service }}",
+              "repo": "${{ github.event.client_payload.repo }}",
+              "branch": "${{ github.event.client_payload.branch }}",
+              "version": "${{ github.event.client_payload.version }}",
+              "sha": "${{ github.event.client_payload.sha }}"
+            }
+
+      - name: Trigger cleanup registry
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GH_PAT }}
+          repository: ${{ github.repository }}
+          event-type: cleanup-registry
           client-payload: |
             {
               "service": "${{ github.event.client_payload.service }}",

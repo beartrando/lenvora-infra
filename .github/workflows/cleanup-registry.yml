@@ -1,0 +1,44 @@
+name: Cleanup registry
+
+on:
+  repository_dispatch:
+    types:
+      - cleanup-registry
+
+run-name: "Cleanup registry --- ${{ github.event.client_payload.service }}"
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
+    steps:
+      - name: Cleanup old container versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE: ${{ github.event.client_payload.service }}
+        run: |
+          set -e
+          set -o pipefail
+
+          echo "=== Registry cleanup ==="
+          echo "Package: $PACKAGE"
+
+          gh api \
+            --paginate \
+            -H "Accept: application/vnd.github+json" \
+            "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions?per_page=100" \
+            --jq '.[].id' |
+          tail -n +31 |
+          while read -r VERSION_ID; do
+            echo "Deleting version: $VERSION_ID"
+
+            gh api \
+              --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              "/orgs/${{ github.repository_owner }}/packages/container/$PACKAGE/versions/$VERSION_ID"
+          done
+
+          echo "=== Cleanup completed ==="
