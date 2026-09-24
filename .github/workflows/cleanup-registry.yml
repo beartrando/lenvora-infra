@@ -23,7 +23,7 @@ jobs:
           set -e
 
           REPO_NAME="${REPO#*/}"
-          KEEP_COUNT=30
+          KEEP_COUNT=5
           PROTECTED_TAGS="dev uat prod"
 
           echo "=== Cleanup registry ==="
