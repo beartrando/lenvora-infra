@@ -1,4 +1,4 @@
-name: Delete profile service images
+name: Cleanup registry
 
 on:
   repository_dispatch:
@@ -13,24 +13,53 @@ jobs:
       packages: write
 
     steps:
-      - name: Delete all profile service images
+      - name: Cleanup registry
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.event.client_payload.repo }}
         run: |
           set -e
 
-          echo "=== Getting profile/service versions ==="
+          REPO_NAME="${REPO#*/}"
+          KEEP_COUNT=30
+          PROTECTED_TAGS="dev uat prod"
 
-          gh api \
-            --paginate \
-            --jq '.[].id' \
-            "/user/packages/container/tic-tac-toe-profile%2Fservice/versions?per_page=100" |
-          while read -r VERSION_ID; do
-            echo "Deleting version: $VERSION_ID"
+          echo "=== Cleanup registry ==="
+          echo "Repository: $REPO"
+          echo "Package: $REPO_NAME"
+          echo "Keep: $KEEP_COUNT versions"
+          echo "Protected tags: $PROTECTED_TAGS"
+
+          for TYPE in service predeploy; do
+            echo "=== Cleanup $TYPE ==="
 
             gh api \
-              --method DELETE \
-              "/user/packages/container/tic-tac-toe-profile%2Fservice/versions/$VERSION_ID"
+              --paginate \
+              "/user/packages/container/${REPO_NAME}%2F${TYPE}/versions?per_page=100" |
+            jq -r \
+              --argjson keep "$KEEP_COUNT" \
+              --arg protected "$PROTECTED_TAGS" '
+                sort_by(.created_at)
+                | reverse
+                | [
+                    .[]
+                    | select(
+                        (.metadata.container.tags // []) as $tags
+                        | ([ $tags[] | select($protected | split(" ") | index(.)) ] | length) == 0
+                      )
+                  ]
+                | .[$keep:]
+                | .[].id
+              ' |
+            while read -r VERSION_ID; do
+              [ -z "$VERSION_ID" ] && continue
+
+              echo "Deleting $TYPE version: $VERSION_ID"
+
+              gh api \
+                --method DELETE \
+                "/user/packages/container/${REPO_NAME}%2F${TYPE}/versions/$VERSION_ID"
+            done
           done
 
-          echo "=== All profile/service images deleted ==="
+          echo "=== Cleanup completed ==="
