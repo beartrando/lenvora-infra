@@ -1,6 +1,6 @@
-PRISMA_SERVICES := auth profile engine orchestration battle streaming bot
-NODE_SERVICES := gateway auth profile streaming battle bot engine orchestration
-GIT_SERVICES:= bot auth battle engine front gateway orchestration profile streaming
+PRISMA_SERVICES := auth profile engine orchestration battle ai
+NODE_SERVICES := gateway auth profile ai engine orchestration
+GIT_SERVICES:= ai auth engine front gateway orchestration profile
 FLUTTER_SERVICES := front
 
 
