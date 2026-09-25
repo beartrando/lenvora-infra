@@ -35,7 +35,7 @@ jobs:
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
-          cluster_name: tic-tac-toe
+          cluster_name: lenvora
           location: europe-central2-a
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
@@ -44,7 +44,7 @@ jobs:
           set -e
           set -o pipefail
 
-          NAMESPACE="tic-tac-toe"
+          NAMESPACE="lenvora"
           SERVICE="${{ github.event.client_payload.service }}"
           REPO="${{ github.event.client_payload.repo }}"
           VERSION="${{ github.event.client_payload.version }}"

@@ -1,7 +1,7 @@
 services:
   gateway:
     container_name: ttt-gateway
-    image: ghcr.io/beartrando/tic-tac-toe-gateway/service:${GATEWAY_VERSION}
+    image: ghcr.io/beartrando/lenvora-gateway/service:${GATEWAY_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.gateway
@@ -18,7 +18,7 @@ services:
 
   auth:
     container_name: ttt-auth
-    image: ghcr.io/beartrando/tic-tac-toe-auth/service:${AUTH_VERSION}
+    image: ghcr.io/beartrando/lenvora-auth/service:${AUTH_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.auth
@@ -40,7 +40,7 @@ services:
 
   orchestration:
     container_name: ttt-orchestration
-    image: ghcr.io/beartrando/tic-tac-toe-orchestration/service:${ORCHESTRATION_VERSION}
+    image: ghcr.io/beartrando/lenvora-orchestration/service:${ORCHESTRATION_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.orchestration
@@ -60,7 +60,7 @@ services:
 
   bot:
     container_name: ttt-bot
-    image: ghcr.io/beartrando/tic-tac-toe-bot/service:${BOT_VERSION}
+    image: ghcr.io/beartrando/lenvora-bot/service:${BOT_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.bot
@@ -76,46 +76,9 @@ services:
       retries: 10
       start_period: 20s
 
-  battle:
-    container_name: ttt-battle
-    image: ghcr.io/beartrando/tic-tac-toe-battle/service:${BATTLE_VERSION}
-    restart: unless-stopped
-    env_file:
-      - ./services/.env.battle
-    depends_on:
-      kafka:
-        condition: service_healthy
-      pgbouncer:
-        condition: service_healthy
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-
-  streaming:
-    container_name: ttt-streaming
-    image: ghcr.io/beartrando/tic-tac-toe-streaming/service:${STREAMING_VERSION}
-    restart: unless-stopped
-    env_file:
-        - ./services/.env.streaming
-    ports:
-      - "8080:8080"
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-
   profile:
     container_name: ttt-profile
-    image: ghcr.io/beartrando/tic-tac-toe-profile/service:${PROFILE_VERSION}
+    image: ghcr.io/beartrando/lenvora-profile/service:${PROFILE_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.profile
@@ -135,7 +98,7 @@ services:
 
   engine:
     container_name: ttt-engine
-    image: ghcr.io/beartrando/tic-tac-toe-engine/service:${ENGINE_VERSION}
+    image: ghcr.io/beartrando/lenvora-engine/service:${ENGINE_VERSION}
     restart: unless-stopped
     env_file:
       - ./services/.env.engine

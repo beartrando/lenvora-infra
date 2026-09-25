@@ -108,59 +108,6 @@ services:
       retries: 10
       start_period: 20s
 
-  battle:
-    build:
-      context: .
-      dockerfile: services/battle/Dockerfile
-      target: dev
-    container_name: ttt-battle
-    env_file:
-      - services/battle/.env
-    volumes:
-      - ./shared:/usr/src/app/shared
-      - ./services/battle/src:/usr/src/app/services/battle/src/
-      - ./services/battle/__tests__:/usr/src/app/services/battle/__tests__/
-      - ./services/battle/package.json:/usr/src/app/services/battle/package.json
-    depends_on:
-      kafka:
-        condition: service_healthy
-      pgbouncer:
-        condition: service_healthy
-    command: pnpm dlx turbo run dev --parallel
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-
-  streaming:
-    build:
-      context: .
-      dockerfile: services/streaming/Dockerfile
-      target: dev
-    container_name: ttt-streaming
-    env_file:
-      - services/streaming/.env
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./shared:/usr/src/app/shared
-      - ./services/streaming/src:/usr/src/app/services/streaming/src/
-      - ./services/streaming/__tests__:/usr/src/app/services/streaming/__tests__/
-      - ./services/streaming/package.json:/usr/src/app/services/streaming/package.json
-    command: pnpm dlx turbo run dev --parallel
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
-
   profile:
     build:
       context: .

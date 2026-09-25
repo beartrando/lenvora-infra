@@ -19,7 +19,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: orchestration
-          image: ghcr.io/beartrando/tic-tac-toe-orchestration/service
+          image: ghcr.io/beartrando/lenvora-orchestration/service
 
           ports:
             - containerPort: 50051

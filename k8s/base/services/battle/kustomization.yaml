@@ -5,5 +5,5 @@ resources:
   - secret.yaml
 
 images:
-  - name: ghcr.io/beartrando/tic-tac-toe-battle/service
+  - name: ghcr.io/beartrando/lenvora-battle/service
     newTag: "dev"

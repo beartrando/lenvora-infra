@@ -7,5 +7,5 @@ resources:
   - ingress.yaml
 
 images:
-  - name: ghcr.io/beartrando/tic-tac-toe-streaming/service
+  - name: ghcr.io/beartrando/lenvora-streaming/service
     newTag: "dev"

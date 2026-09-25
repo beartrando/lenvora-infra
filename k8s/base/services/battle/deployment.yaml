@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: battle
-          image: ghcr.io/beartrando/tic-tac-toe-battle/service
+          image: ghcr.io/beartrando/lenvora-battle/service
 
           ports:
             - containerPort: 50051

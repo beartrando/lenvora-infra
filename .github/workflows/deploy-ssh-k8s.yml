@@ -39,7 +39,7 @@ jobs:
             set -e
             set -o pipefail
 
-            NAMESPACE="tic-tac-toe"
+            NAMESPACE="lenvora"
             SERVICE="${{ github.event.client_payload.service }}"
             REPO="${{ github.event.client_payload.repo }}"
             VERSION="${{ github.event.client_payload.version }}"

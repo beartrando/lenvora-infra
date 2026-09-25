@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: engine
-          image: ghcr.io/beartrando/tic-tac-toe-engine/service
+          image: ghcr.io/beartrando/lenvora-engine/service
 
           ports:
             - containerPort: 50051
