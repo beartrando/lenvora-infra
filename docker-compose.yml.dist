@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: services/gateway/Dockerfile
       target: dev
-    container_name: ttt-gateway
+    container_name: lenvora-gateway
     env_file:
       - services/gateway/.env
     ports:
@@ -29,7 +29,7 @@ services:
       context: .
       dockerfile: services/auth/Dockerfile
       target: dev
-    container_name: ttt-auth
+    container_name: lenvora-auth
     env_file:
       - services/auth/.env
     environment:
@@ -59,7 +59,7 @@ services:
       context: .
       dockerfile: services/orchestration/Dockerfile
       target: dev
-    container_name: ttt-orchestration
+    container_name: lenvora-orchestration
     env_file:
       - services/orchestration/.env
     volumes:
@@ -87,7 +87,7 @@ services:
       context: .
       dockerfile: services/jarvis/Dockerfile
       target: dev
-    container_name: ttt-jarvis
+    container_name: lenvora-jarvis
     env_file:
       - services/jarvis/.env
     volumes:
@@ -113,7 +113,7 @@ services:
       context: .
       dockerfile: services/profile/Dockerfile
       target: dev
-    container_name: ttt-profile
+    container_name: lenvora-profile
     env_file:
       - services/profile/.env
     volumes:
@@ -141,7 +141,7 @@ services:
       context: .
       dockerfile: services/engine/Dockerfile
       target: dev
-    container_name: ttt-engine
+    container_name: lenvora-engine
     env_file:
       - services/engine/.env
     volumes:
@@ -168,7 +168,7 @@ services:
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
-    container_name: ttt-kafka-ui
+    container_name: lenvora-kafka-ui
 #    ports:
 #      - "8081:8080"
     environment:
@@ -186,7 +186,7 @@ services:
 
   kafka:
     image: apache/kafka:4.1.1
-    container_name: ttt-kafka
+    container_name: lenvora-kafka
     ports:
       - "9092:9092"
     environment:
@@ -215,7 +215,7 @@ services:
 
   postgres:
     image: postgres:17.6
-    container_name: ttt-postgres
+    container_name: lenvora-postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -238,7 +238,7 @@ services:
 
   pgbouncer:
     image: edoburu/pgbouncer
-    container_name: ttt-pgbouncer
+    container_name: lenvora-pgbouncer
     volumes:
       - ./services/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
       - ./services/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
@@ -259,7 +259,7 @@ services:
 
   redis:
     image: redis:7.2
-    container_name: ttt-redis
+    container_name: lenvora-redis
     networks:
       - backend
     restart: always
