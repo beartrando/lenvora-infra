@@ -75,183 +75,7 @@ importers:
         version: 3.3.3
       jest:
         specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
-      nodemon:
-        specifier: ^3.1.14
-        version: 3.1.14
-      prisma:
-        specifier: ^6.19.3
-        version: 6.19.3(typescript@6.0.3)
-      supertest:
-        specifier: ^7.2.2
-        version: 7.2.2(supports-color@5.5.0)
-      ts-jest:
-        specifier: ^29.4.9
-        version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
-      ts-node-dev:
-        specifier: ^2.0.0
-        version: 2.0.0(@types/node@24.13.2)(typescript@6.0.3)
-      ts-proto:
-        specifier: ^2.11.6
-        version: 2.11.10
-      tsconfig-paths:
-        specifier: ^4.2.0
-        version: 4.2.0
-      typescript:
-        specifier: ^6.0.2
-        version: 6.0.3
-
-  services/battle:
-    dependencies:
-      '@bufbuild/protobuf':
-        specifier: ^2.11.0
-        version: 2.12.1
-      '@grpc/grpc-js':
-        specifier: ^1.14.3
-        version: 1.14.4
-      '@prisma/client':
-        specifier: ^6.19.3
-        version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
-      '@shared/errors':
-        specifier: workspace:*
-        version: link:../../shared/errors
-      '@shared/grpc-client-manager':
-        specifier: workspace:*
-        version: link:../../shared/grpc-client-manager
-      '@shared/kafka-manager':
-        specifier: workspace:*
-        version: link:../../shared/kafka-manager
-      '@shared/logger':
-        specifier: workspace:*
-        version: link:../../shared/logger
-      '@shared/pg-boss-manager':
-        specifier: workspace:*
-        version: link:../../shared/pg-boss-manager
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
-      pg-boss:
-        specifier: ^12.15.0
-        version: 12.24.1
-    devDependencies:
-      '@types/amqplib':
-        specifier: ^0.10.8
-        version: 0.10.8
-      '@types/jest':
-        specifier: ^30.0.0
-        version: 30.0.0
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
-      '@types/supertest':
-        specifier: ^7.2.0
-        version: 7.2.0
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
-      jest:
-        specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
-      nodemon:
-        specifier: ^3.1.14
-        version: 3.1.14
-      prisma:
-        specifier: ^6.19.3
-        version: 6.19.3(typescript@6.0.3)
-      supertest:
-        specifier: ^7.2.2
-        version: 7.2.2(supports-color@5.5.0)
-      ts-jest:
-        specifier: ^29.4.9
-        version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
-      ts-node-dev:
-        specifier: ^2.0.0
-        version: 2.0.0(@types/node@24.13.2)(typescript@6.0.3)
-      ts-proto:
-        specifier: ^2.11.6
-        version: 2.11.10
-      tsconfig-paths:
-        specifier: ^4.2.0
-        version: 4.2.0
-      typescript:
-        specifier: ^6.0.2
-        version: 6.0.3
-
-  services/bot:
-    dependencies:
-      '@bufbuild/protobuf':
-        specifier: ^2.11.0
-        version: 2.12.1
-      '@grpc/grpc-js':
-        specifier: ^1.14.3
-        version: 1.14.4
-      '@prisma/client':
-        specifier: ^6.19.3
-        version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
-      '@shared/errors':
-        specifier: workspace:*
-        version: link:../../shared/errors
-      '@shared/kafka-manager':
-        specifier: workspace:*
-        version: link:../../shared/kafka-manager
-      '@shared/logger':
-        specifier: workspace:*
-        version: link:../../shared/logger
-      '@shared/pg-boss-manager':
-        specifier: workspace:*
-        version: link:../../shared/pg-boss-manager
-      cookie-parser:
-        specifier: ^1.4.7
-        version: 1.4.7
-      cors:
-        specifier: ^2.8.6
-        version: 2.8.6
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
-      pg-boss:
-        specifier: ^12.15.0
-        version: 12.24.1
-      ws:
-        specifier: ^8.21.0
-        version: 8.21.0
-    devDependencies:
-      '@types/cors':
-        specifier: ^2.8.19
-        version: 2.8.19
-      '@types/jest':
-        specifier: ^30.0.0
-        version: 30.0.0
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
-      '@types/node':
-        specifier: ^24.13.2
-        version: 24.13.2
-      '@types/supertest':
-        specifier: ^7.2.0
-        version: 7.2.0
-      '@types/ws':
-        specifier: ^8.5.10
-        version: 8.18.1
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
-      jest:
-        specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -339,7 +163,7 @@ importers:
         version: 3.3.3
       jest:
         specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -433,7 +257,7 @@ importers:
         version: 3.3.3
       jest:
         specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -524,7 +348,7 @@ importers:
         version: 3.3.3
       jest:
         specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -606,113 +430,7 @@ importers:
         version: 3.3.3
       jest:
         specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
-      nodemon:
-        specifier: ^3.1.14
-        version: 3.1.14
-      prisma:
-        specifier: ^6.19.3
-        version: 6.19.3(typescript@6.0.3)
-      supertest:
-        specifier: ^7.2.2
-        version: 7.2.2(supports-color@5.5.0)
-      ts-jest:
-        specifier: ^29.4.9
-        version: 29.4.11(@babel/core@7.29.7)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.7))(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
-      ts-node-dev:
-        specifier: ^2.0.0
-        version: 2.0.0(@types/node@24.13.2)(typescript@6.0.3)
-      ts-proto:
-        specifier: ^2.11.6
-        version: 2.11.10
-      tsconfig-paths:
-        specifier: ^4.2.0
-        version: 4.2.0
-      typescript:
-        specifier: ^6.0.2
-        version: 6.0.3
-
-  services/streaming:
-    dependencies:
-      '@bufbuild/protobuf':
-        specifier: ^2.11.0
-        version: 2.12.1
-      '@grpc/grpc-js':
-        specifier: ^1.14.3
-        version: 1.14.4
-      '@prisma/client':
-        specifier: ^6.19.3
-        version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
-      '@shared/errors':
-        specifier: workspace:*
-        version: link:../../shared/errors
-      '@shared/grpc-client-manager':
-        specifier: workspace:*
-        version: link:../../shared/grpc-client-manager
-      '@shared/kafka-manager':
-        specifier: workspace:*
-        version: link:../../shared/kafka-manager
-      '@shared/logger':
-        specifier: workspace:*
-        version: link:../../shared/logger
-      '@shared/pg-boss-manager':
-        specifier: workspace:*
-        version: link:../../shared/pg-boss-manager
-      cookie-parser:
-        specifier: ^1.4.7
-        version: 1.4.7
-      cors:
-        specifier: ^2.8.6
-        version: 2.8.6
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.11.1
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
-      pg-boss:
-        specifier: ^12.15.0
-        version: 12.24.1
-      ws:
-        specifier: ^8.21.0
-        version: 8.21.0
-    devDependencies:
-      '@types/amqplib':
-        specifier: ^0.10.8
-        version: 0.10.8
-      '@types/cookie-parser':
-        specifier: ^1.4.10
-        version: 1.4.10(@types/express@5.0.6)
-      '@types/cors':
-        specifier: ^2.8.19
-        version: 2.8.19
-      '@types/ioredis':
-        specifier: ^5.0.0
-        version: 5.0.0
-      '@types/jest':
-        specifier: ^30.0.0
-        version: 30.0.0
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
-      '@types/supertest':
-        specifier: ^7.2.0
-        version: 7.2.0
-      '@types/ws':
-        specifier: ^8.5.10
-        version: 8.18.1
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
-      jest:
-        specifier: ^30.3.0
-        version: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       nodemon:
         specifier: ^3.1.14
         version: 3.1.14
@@ -1024,7 +742,7 @@ packages:
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
     engines: {node: '>=10.10.0'}
-    deprecated: Use @eslint/configs-array instead
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1401,9 +1119,6 @@ packages:
 
   '@types/supertest@7.2.0':
     resolution: {integrity: sha512-uh2Lv57xvggst6lCqNdFAmDSvoMG7M/HDtX4iUCquxQ5EGPtaPM5PL5Hmi7LCvOG8db7YaCPNJEeoI8s/WzIQw==}
-
-  '@types/ws@8.18.1':
-    resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -3415,18 +3130,6 @@ packages:
     resolution: {integrity: sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  ws@8.21.0:
-    resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
@@ -3744,11 +3447,11 @@ snapshots:
       jest-util: 30.4.1
       slash: 3.0.0
 
-  '@jest/core@30.4.2(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))':
+  '@jest/core@30.4.2(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))':
     dependencies:
       '@jest/console': 30.4.1
       '@jest/pattern': 30.4.0
-      '@jest/reporters': 30.4.1(supports-color@5.5.0)
+      '@jest/reporters': 30.4.1
       '@jest/test-result': 30.4.1
       '@jest/transform': 30.4.1
       '@jest/types': 30.4.1
@@ -3776,7 +3479,7 @@ snapshots:
       slash: 3.0.0
     transitivePeerDependencies:
       - babel-plugin-macros
-      - esbuild-registerHandler
+      - esbuild-register
       - supports-color
       - ts-node
 
@@ -3825,7 +3528,7 @@ snapshots:
       '@types/node': 24.13.2
       jest-regex-util: 30.4.0
 
-  '@jest/reporters@30.4.1(supports-color@5.5.0)':
+  '@jest/reporters@30.4.1':
     dependencies:
       '@bcoe/v8-coverage': 0.2.3
       '@jest/console': 30.4.1
@@ -3842,7 +3545,7 @@ snapshots:
       istanbul-lib-coverage: 3.2.2
       istanbul-lib-instrument: 6.0.3
       istanbul-lib-report: 3.0.1
-      istanbul-lib-source-maps: 5.0.6(supports-color@5.5.0)
+      istanbul-lib-source-maps: 5.0.6
       istanbul-reports: 3.2.0
       jest-message-util: 30.4.1
       jest-util: 30.4.1
@@ -4198,10 +3901,6 @@ snapshots:
     dependencies:
       '@types/methods': 1.1.4
       '@types/superagent': 8.1.10
-
-  '@types/ws@8.18.1':
-    dependencies:
-      '@types/node': 24.13.2
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -5125,7 +4824,7 @@ snapshots:
       make-dir: 4.0.0
       supports-color: 7.2.0
 
-  istanbul-lib-source-maps@5.0.6(supports-color@5.5.0):
+  istanbul-lib-source-maps@5.0.6:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       debug: 4.4.3(supports-color@5.5.0)
@@ -5178,7 +4877,7 @@ snapshots:
 
   jest-cli@30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
     dependencies:
-      '@jest/core': 30.4.2(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      '@jest/core': 30.4.2(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       '@jest/test-result': 30.4.1
       '@jest/types': 30.4.1
       chalk: 4.1.2
@@ -5191,7 +4890,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
-      - esbuild-registerHandler
+      - esbuild-register
       - supports-color
       - ts-node
 
@@ -5443,16 +5142,16 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
+  jest@30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
     dependencies:
-      '@jest/core': 30.4.2(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      '@jest/core': 30.4.2(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       '@jest/types': 30.4.1
       import-local: 3.2.0
       jest-cli: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
-      - esbuild-registerHandler
+      - esbuild-register
       - supports-color
       - ts-node
 
@@ -6169,7 +5868,7 @@ snapshots:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       handlebars: 4.7.9
-      jest: 30.4.2(@types/node@24.13.2)(supports-color@5.5.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      jest: 30.4.2(@types/node@24.13.2)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
@@ -6372,8 +6071,6 @@ snapshots:
     dependencies:
       imurmurhash: 0.1.4
       signal-exit: 4.1.0
-
-  ws@8.21.0: {}
 
   xtend@4.0.2: {}
 

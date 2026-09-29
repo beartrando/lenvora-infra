@@ -335,12 +335,12 @@ battles-drop:
 
 BATTLE_ID := e9034cbf-30fb-42ee-8bed-40218b6ac9f3
 
-kafka-connect-bot:
+kafka-connect-jarvis:
 	echo '{"battleId":"$(BATTLE_ID)"}' | \
     docker compose exec -T kafka \
         /opt/kafka/bin/kafka-console-producer.sh \
         --bootstrap-server localhost:9092 \
-        --topic bot.connecting-request
+        --topic jarvis.connecting-request
 
 artifacts-drop:
 	find . -name "node_modules" -type d -prune -exec rm -rf '{}' +

@@ -82,19 +82,19 @@ services:
       retries: 10
       start_period: 20s
 
-  bot:
+  jarvis:
     build:
       context: .
-      dockerfile: services/bot/Dockerfile
+      dockerfile: services/jarvis/Dockerfile
       target: dev
-    container_name: ttt-bot
+    container_name: ttt-jarvis
     env_file:
-      - services/bot/.env
+      - services/jarvis/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/bot/src:/usr/src/app/services/bot/src/
-      - ./services/bot/__tests__:/usr/src/app/services/bot/__tests__/
-      - ./services/bot/package.json:/usr/src/app/services/bot/package.json
+      - ./services/jarvis/src:/usr/src/app/services/jarvis/src/
+      - ./services/jarvis/__tests__:/usr/src/app/services/jarvis/__tests__/
+      - ./services/jarvis/package.json:/usr/src/app/services/jarvis/package.json
     depends_on:
       pgbouncer:
         condition: service_healthy
