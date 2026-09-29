@@ -30,6 +30,14 @@ install:
 			cp "$$ENV_EXAMPLE_PATH" "$$ENV_PATH"; \
 		fi; \
 	done
+
+
+	for s in $(FRONT_SERVICES); do \
+		echo "▶️  Creating env for $$s..."; \
+		$(MAKE) -C services/$$s env-generate; \
+	done \
+
+
 	@if [ ! -f "docker-compose.yml" ] && [ -f "docker-compose.yml.dist" ]; then \
         echo "[env] Создаю docker-compose.yml из docker-compose.yml.dist"; \
         cp docker-compose.yml.dist docker-compose.yml; \
