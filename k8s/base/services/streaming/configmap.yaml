@@ -14,7 +14,6 @@ data:
   SERVICE_AUTH_URL: "auth:50051"
   SERVICE_PROFILE_URL: "profile:50051"
   SERVICE_GUSTEAU_URL: "gusteau:50051"
-  SERVICE_BATTLE_URL: "battle:50051"
 
   RABBIT_HOST: "rabbitmq"
   RABBIT_USER: "user"

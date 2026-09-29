@@ -15,7 +15,6 @@ resources:
   - services/auth
   - services/orchestration
   - services/remy
-  - services/battle
   - services/streaming
   - services/profile
   - services/gusteau

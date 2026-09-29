@@ -281,17 +281,6 @@ test:
 	done
 	@make bip
 
-tmux:
-	tmux new-session -d -s logs
-	tmux send-keys -t logs:0 'docker compose logs -f streaming | lnav -t ' C-m
-	tmux split-window -h -t logs:0
-	tmux send-keys -t logs:0.1 'docker compose logs -f battle | lnav -t ' C-m
-	tmux split-window -v -t logs:0.1
-	tmux send-keys -t logs:0.2 'docker compose logs -f gusteau | lnav -t ' C-m
-	tmux split-window -v -t logs:0.0
-	tmux select-pane -t logs:0.1
-	tmux attach -t logs
-
 healthloop:
 	@echo "▶ Starting health loop..."
 	@while true; do \
@@ -311,9 +300,6 @@ healthloop:
 		sleep 5; \
 	done
 
-battles-clear:
-	docker compose exec postgres psql -U postgres -d battle -c "TRUNCATE TABLE battles CASCADE;"
-
 reset-db:
 	docker compose down postgres
 	docker volume rm game_postgres_data
@@ -325,22 +311,6 @@ reset-kafka:
 	docker volume rm game_kafka_data
 	docker compose up kafka -d
 	@make migrate
-
-battles-drop:
-	dc exec postgres dropdb -U postgres battle
-
-
-
-
-
-BATTLE_ID := e9034cbf-30fb-42ee-8bed-40218b6ac9f3
-
-kafka-connect-remy:
-	echo '{"battleId":"$(BATTLE_ID)"}' | \
-    docker compose exec -T kafka \
-        /opt/kafka/bin/kafka-console-producer.sh \
-        --bootstrap-server localhost:9092 \
-        --topic remy.connecting-request
 
 artifacts-drop:
 	find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
