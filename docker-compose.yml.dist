@@ -82,19 +82,19 @@ services:
       retries: 10
       start_period: 20s
 
-  jarvis:
+  remy:
     build:
       context: .
-      dockerfile: services/jarvis/Dockerfile
+      dockerfile: services/remy/Dockerfile
       target: dev
-    container_name: lenvora-jarvis
+    container_name: lenvora-remy
     env_file:
-      - services/jarvis/.env
+      - services/remy/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/jarvis/src:/usr/src/app/services/jarvis/src/
-      - ./services/jarvis/__tests__:/usr/src/app/services/jarvis/__tests__/
-      - ./services/jarvis/package.json:/usr/src/app/services/jarvis/package.json
+      - ./services/remy/src:/usr/src/app/services/remy/src/
+      - ./services/remy/__tests__:/usr/src/app/services/remy/__tests__/
+      - ./services/remy/package.json:/usr/src/app/services/remy/package.json
     depends_on:
       pgbouncer:
         condition: service_healthy

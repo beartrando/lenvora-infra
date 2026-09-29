@@ -14,7 +14,7 @@ resources:
   - services/gateway
   - services/auth
   - services/orchestration
-  - services/jarvis
+  - services/remy
   - services/battle
   - services/streaming
   - services/profile

@@ -58,12 +58,12 @@ services:
       retries: 10
       start_period: 20s
 
-  jarvis:
-    container_name: lenvora-jarvis
-    image: ghcr.io/beartrando/lenvora-jarvis/service:${JARVIS_VERSION}
+  remy:
+    container_name: lenvora-remy
+    image: ghcr.io/beartrando/lenvora-remy/service:${REMY_VERSION}
     restart: unless-stopped
     env_file:
-      - ./services/.env.jarvis
+      - ./services/.env.remy
     depends_on:
       pgbouncer:
         condition: service_healthy

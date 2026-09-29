@@ -5,5 +5,5 @@ resources:
   - secret.yaml
 
 images:
-  - name: ghcr.io/beartrando/lenvora-jarvis/service
+  - name: ghcr.io/beartrando/lenvora-remy/service
     newTag: "dev"

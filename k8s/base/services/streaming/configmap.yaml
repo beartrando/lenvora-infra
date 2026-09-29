@@ -28,4 +28,4 @@ data:
 
   KAFKA_BROKERS: "kafka:9092"
   KAFKA_CLIENT_ID: "streaming-client"
-  MESSAGE_PRODUCER_TOPIC_JARVIS_CONNECTING_REQUEST: "jarvis.connecting-request"
+  MESSAGE_PRODUCER_TOPIC_REMY_CONNECTING_REQUEST: "remy.connecting-request"
