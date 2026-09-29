@@ -10,6 +10,9 @@
 [submodule "services/remy"]
 	path = services/remy
 	url = git@github.com:beartrando/lenvora-remy.git
+[submodule "services/gusteau"]
+	path = services/gusteau
+	url = git@github.com:beartrando/lenvora-gusteau.git
 [submodule "services/engine"]
     path = services/engine
     url = git@github.com:beartrando/lenvora-engine.git
