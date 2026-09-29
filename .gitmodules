@@ -7,9 +7,9 @@
 [submodule "services/profile"]
 	path = services/profile
 	url = git@github.com:beartrando/lenvora-profile.git
-[submodule "services/ai"]
-	path = services/ai
-	url = git@github.com:beartrando/lenvora-ai.git
+[submodule "services/jarvis"]
+	path = services/jarvis
+	url = git@github.com:beartrando/lenvora-jarvis.git
 [submodule "services/engine"]
     path = services/engine
     url = git@github.com:beartrando/lenvora-engine.git

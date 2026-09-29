@@ -1,6 +1,6 @@
-PRISMA_SERVICES := auth profile engine orchestration battle ai
-NODE_SERVICES := gateway auth profile ai engine orchestration
-GIT_SERVICES:= ai auth engine front gateway orchestration profile
+PRISMA_SERVICES := auth profile engine orchestration battle jarvis
+NODE_SERVICES := gateway auth profile jarvis engine orchestration
+GIT_SERVICES:= jarvis auth engine front gateway orchestration profile
 FLUTTER_SERVICES := front
 
 

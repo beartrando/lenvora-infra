@@ -353,6 +353,14 @@ fix-eof:
 		-type d -name dist -prune -o \
 		-type d -name node_modules -prune -o \
 		-type f \
+		! -iname '*.png' \
+		! -iname '*.jpg' \
+		! -iname '*.jpeg' \
+		! -iname '*.gif' \
+		! -iname '*.webp' \
+		! -iname '*.ico' \
+		! -iname '*.bmp' \
+		! -iname '*.svg' \
 		-exec sh -c '\
 			for f do \
 				if [ -s "$$f" ] && [ "$$(tail -c 1 "$$f" | od -An -t x1 | tr -d " ")" != "0a" ]; then \
@@ -361,3 +369,4 @@ fix-eof:
 				fi; \
 			done \
 		' sh {} +
+
