@@ -96,12 +96,12 @@ services:
       retries: 10
       start_period: 20s
 
-  engine:
-    container_name: lenvora-engine
-    image: ghcr.io/beartrando/lenvora-engine/service:${ENGINE_VERSION}
+  gusteau:
+    container_name: lenvora-gusteau
+    image: ghcr.io/beartrando/lenvora-gusteau/service:${GUSTEAU_VERSION}
     restart: unless-stopped
     env_file:
-      - ./services/.env.engine
+      - ./services/.env.gusteau
     depends_on:
       kafka:
         condition: service_healthy

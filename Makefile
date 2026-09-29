@@ -287,7 +287,7 @@ tmux:
 	tmux split-window -h -t logs:0
 	tmux send-keys -t logs:0.1 'docker compose logs -f battle | lnav -t ' C-m
 	tmux split-window -v -t logs:0.1
-	tmux send-keys -t logs:0.2 'docker compose logs -f engine | lnav -t ' C-m
+	tmux send-keys -t logs:0.2 'docker compose logs -f gusteau | lnav -t ' C-m
 	tmux split-window -v -t logs:0.0
 	tmux select-pane -t logs:0.1
 	tmux attach -t logs

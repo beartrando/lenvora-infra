@@ -1,4 +1,4 @@
-LOGS_ORDER := remy streaming engine gateway battle auth profile orchestration
+LOGS_ORDER := remy streaming gusteau gateway battle auth profile orchestration
 
 logs:
 	@guake --show
