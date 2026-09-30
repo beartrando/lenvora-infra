@@ -19,6 +19,12 @@
 [submodule "services/orchestration"]
     path = services/orchestration
     url = git@github.com:beartrando/lenvora-orchestration.git
+[submodule "services/streaming"]
+	path = services/streaming
+	url = git@github.com:beartrando/lenvora-streaming.git
+[submodule "services/speech-to-text"]
+	path = services/speech-to-text
+	url = git@github.com:beartrando/lenvora-speech-to-text.git
 [submodule "proto"]
     path = proto
     url = git@github.com:beartrando/lenvora-proto.git

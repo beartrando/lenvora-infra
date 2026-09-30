@@ -166,6 +166,66 @@ services:
       retries: 10
       start_period: 20s
 
+  streaming:
+    build:
+      context: .
+      dockerfile: services/streaming/Dockerfile
+      target: dev
+    container_name: lenvora-streaming
+    env_file:
+      - services/streaming/.env
+    volumes:
+      - ./shared:/usr/src/app/shared
+      - ./services/streaming/src:/usr/src/app/services/streaming/src/
+      - ./services/streaming/__tests__:/usr/src/app/services/streaming/__tests__/
+      - ./services/streaming/package.json:/usr/src/app/services/streaming/package.json
+    depends_on:
+      kafka:
+        condition: service_healthy
+      pgbouncer:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: pnpm dlx turbo run dev --parallel
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  speech-to-text:
+    build:
+      context: .
+      dockerfile: services/speech-to-text/Dockerfile
+      target: dev
+    container_name: lenvora-speech-to-text
+    env_file:
+      - services/speech-to-text/.env
+    volumes:
+      - ./shared:/usr/src/app/shared
+      - ./services/speech-to-text/src:/usr/src/app/services/speech-to-text/src/
+      - ./services/speech-to-text/__tests__:/usr/src/app/services/speech-to-text/__tests__/
+      - ./services/speech-to-text/package.json:/usr/src/app/services/speech-to-text/package.json
+    depends_on:
+      kafka:
+        condition: service_healthy
+      pgbouncer:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: pnpm dlx turbo run dev --parallel
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: lenvora-kafka-ui
