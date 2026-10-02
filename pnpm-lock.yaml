@@ -573,9 +573,6 @@ importers:
       '@shared/errors':
         specifier: workspace:*
         version: link:../../shared/errors
-      '@shared/grpc-client-manager':
-        specifier: workspace:*
-        version: link:../../shared/grpc-client-manager
       '@shared/kafka-manager':
         specifier: workspace:*
         version: link:../../shared/kafka-manager
@@ -591,9 +588,6 @@ importers:
       cors:
         specifier: ^2.8.6
         version: 2.8.6
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.11.1
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -607,24 +601,18 @@ importers:
         specifier: ^8.21.0
         version: 8.22.0
     devDependencies:
-      '@types/amqplib':
-        specifier: ^0.10.8
-        version: 0.10.8
-      '@types/cookie-parser':
-        specifier: ^1.4.10
-        version: 1.4.10(@types/express@5.0.6)
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
-      '@types/ioredis':
-        specifier: ^5.0.0
-        version: 5.0.0
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
+      '@types/node':
+        specifier: ^24.13.2
+        version: 24.13.2
       '@types/supertest':
         specifier: ^7.2.0
         version: 7.2.0
