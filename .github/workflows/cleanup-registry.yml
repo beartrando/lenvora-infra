@@ -1,4 +1,4 @@
-name: Delete streaming images
+name: Cleanup docker images
 
 on:
   repository_dispatch:
