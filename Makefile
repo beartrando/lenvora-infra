@@ -102,7 +102,7 @@ prisma-generate:
 	@echo '🚀 Generating Prisma clients...'
 	@for service in $(PRISMA_SERVICES); do \
 		echo '🚀 Generating' $$service 'Prisma client...' && \
-		docker cp ./$(SERVICE_DIR)/$$service/src/infrastructure/db/prisma lenvora-$$service:/usr/src/app/$(SERVICE_DIR)/$$service; \
+		docker cp ./$(SERVICE_DIR)/$$service/src/infrastructure/db/prisma $(PROJECT_PREFIX)-$$service:/usr/src/app/$(SERVICE_DIR)/$$service; \
 		docker compose exec -T -w /usr/src/app/services/$$service $$service npx prisma generate; \
 	done
 	@if [ "$(bip)" != "no" ]; then \
@@ -183,6 +183,13 @@ git-commit-all:
 
 
 git-push-all:
+	@echo "\033[1;34m[*] Pushing monorepo...\033[0m"
+	if git push; then \
+		echo "\033[0;32m[✓] Pushed monorepo\033[0m"; \
+	else \
+		echo "\033[0;31m[✗] Failed to push monorepo\033[0m"; \
+	fi
+
 	@for dir in $(GIT_SERVICES); do \
 		echo "\033[1;34m[*] Pushing $$dir...\033[0m"; \
 		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
@@ -206,12 +213,6 @@ git-push-all:
 		$(MAKE) bip; \
 	fi
 
-	@echo "\033[1;34m[*] Pushing monorepo...\033[0m"
-	if git push; then \
-		echo "\033[0;32m[✓] Pushed monorepo\033[0m"; \
-	else \
-		echo "\033[0;31m[✗] Failed to push monorepo\033[0m"; \
-	fi
 	@if [ "$(bip)" != "no" ]; then \
 		$(MAKE) bip; \
 	fi
@@ -322,6 +323,7 @@ build:
 		BUILDKIT_PROGRESS=plain docker compose build "$$service" || exit 1; \
 	done
 
+
 fix-eof:
 	find . \
 		-type d -name .git -prune -o \
@@ -339,6 +341,8 @@ fix-eof:
 		! -iname '*.ico' \
 		! -iname '*.bmp' \
 		! -iname '*.svg' \
+		! -iname '*.bin' \
+		! -iname '*.lock' \
 		-exec sh -c '\
 			for f do \
 				if [ -s "$$f" ] && [ "$$(tail -c 1 "$$f" | od -An -t x1 | tr -d " ")" != "0a" ]; then \
