@@ -1,11 +1,13 @@
 CONTEXT_DIR := context
+EXCLUDED_DIRS := services/postgres services/pgbouncer
 
 .PHONY: context-init context-capture
 
 context-init:
-	@if find . -type f -name 'CONTEXT.md' \
-		-not -path './$(CONTEXT_DIR)/*' \
-		-print -quit | grep -q .; then \
+	@if find . \
+		$(foreach dir,$(EXCLUDED_DIRS),-path './$(dir)' -prune -o) \
+		-path './$(CONTEXT_DIR)' -prune -o \
+		-type f -name 'CONTEXT.md' -print -quit | grep -q .; then \
 		echo "ERROR: CONTEXT.md already exists in the project."; \
 		echo "context-init is allowed only for initial setup."; \
 		exit 1; \
@@ -20,8 +22,10 @@ context-init:
 		' sh {} +
 
 context-capture:
-	@find . -type f -name 'CONTEXT.md' \
-		-not -path './$(CONTEXT_DIR)/*' \
+	@find . \
+		$(foreach dir,$(EXCLUDED_DIRS),-path './$(dir)' -prune -o) \
+		-path './$(CONTEXT_DIR)' -prune -o \
+		-type f -name 'CONTEXT.md' \
 		-exec sh -c ' \
 			for file do \
 				target="$(CONTEXT_DIR)/$${file#./}"; \
