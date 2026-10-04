@@ -1,9 +1,0 @@
-resources:
-  - deployment.yaml
-  - service.yaml
-  - configmap.yaml
-  - secret.yaml
-
-images:
-  - name: ghcr.io/beartrando/lenvora-orchestration/service
-    newTag: "dev"
