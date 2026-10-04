@@ -1,5 +1,12 @@
 GIT_EXTRA_REPOS := proto context
 
+git-commit-and-push-all:
+	@echo "🚀 Commit all repos..."
+	@make git-commit-all bip=no
+	@echo "🚀 Push all repos..."
+	@make git-push-all bip=no
+	@make bip
+
 git-commit-all:
 	@for dir in $(GIT_SERVICES); do \
 		echo "\033[1;33m[*] Checking $$dir...\033[0m"; \
@@ -74,4 +81,3 @@ git-push-all:
 	@if [ "$(bip)" != "no" ]; then \
 		$(MAKE) bip; \
 	fi
-	
