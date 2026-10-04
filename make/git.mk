@@ -63,7 +63,23 @@ git-push-all:
 		echo "\033[0;31m[✗] Failed to push monorepo\033[0m"; \
 	fi
 
-	@for dir in $(GIT_SERVICES) $(GIT_EXTRA_REPOS); do \
+	@for dir in $(GIT_SERVICES); do \
+		echo "\033[1;34m[*] Pushing $$dir...\033[0m"; \
+		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
+		if [ ! -e "$$SERVICE_PATH/.git" ]; then \
+			echo "\033[0;31m[!] Skipping $$dir — not a git repo\033[0m"; \
+			continue; \
+		fi; \
+		cd "$$SERVICE_PATH"; \
+		if git push; then \
+			echo "\033[0;32m[✓] Pushed $$dir\033[0m"; \
+		else \
+			echo "\033[0;31m[✗] Failed to push $$dir\033[0m"; \
+		fi; \
+		cd - > /dev/null; \
+	done
+
+	@for dir in $(GIT_EXTRA_REPOS); do \
 		echo "\033[1;34m[*] Pushing $$dir...\033[0m"; \
 		if [ ! -e "$$dir/.git" ]; then \
 			echo "\033[0;31m[!] Skipping $$dir — not a git repo\033[0m"; \
