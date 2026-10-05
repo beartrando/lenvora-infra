@@ -208,7 +208,6 @@ services:
     volumes:
       - ./shared:/usr/src/app/shared
       - ./services/speech-to-text/src:/usr/src/app/services/speech-to-text/src/
-      - ./services/speech-to-text/__tests__:/usr/src/app/services/speech-to-text/__tests__/
       - ./services/speech-to-text/package.json:/usr/src/app/services/speech-to-text/package.json
     depends_on:
       kafka:
