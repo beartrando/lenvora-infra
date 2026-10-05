@@ -19,15 +19,6 @@ context-init:
 		cp -R "$$dir" "$$target"; \
 	done
 
-context-apply:
-	@printf "WARNING: This will overwrite CONTEXT directories in the project. Continue? [y/N] "; \
-	read answer; \
-	case "$$answer" in \
-		y|Y|yes|YES) ;; \
-		*) echo "Aborted."; exit 1 ;; \
-	esac
-	@cp -R $(CONTEXT_DIR)/. .
-
 context-capture:
 	@find . \
 		$(foreach dir,$(EXCLUDED_DIRS),-path './$(dir)' -prune -o) \
