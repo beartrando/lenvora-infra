@@ -1,8 +1,9 @@
 packages:
   - 'services/*'
-  - 'shared/*'
 
 injectWorkspacePackages: true
+
+blockExoticSubdeps: false
 
 allowBuilds:
   '@prisma/client': true
@@ -12,6 +13,11 @@ allowBuilds:
   prisma: true
   protobufjs: true
   unrs-resolver: true
+  "@shared/logger@git+https://github.com/beartrando/logger.git": true
+  "@shared/errors@git+https://github.com/beartrando/errors.git": true
+  "@shared/kafka-manager@git+https://github.com/beartrando/kafka-manager.git": true
+  "@shared/grpc-client-manager@git+https://github.com/beartrando/grpc-client-manager.git": true
+  "@shared/pg-boss-manager@git+https://github.com/beartrando/pg-boss-manager.git": true
 
 onlyBuiltDependencies:
   - '@prisma/client'

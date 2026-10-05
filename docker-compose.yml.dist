@@ -4,13 +4,14 @@ services:
       context: .
       dockerfile: services/gateway/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-gateway
     env_file:
       - services/gateway/.env
     ports:
       - "9090:9090"
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/gateway/src:/usr/src/app/services/gateway/src/
       - ./services/gateway/package.json:/usr/src/app/services/gateway/package.json
     command: pnpm dlx turbo run dev --parallel --filter gateway
@@ -28,13 +29,14 @@ services:
       context: .
       dockerfile: services/auth/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-auth
     env_file:
       - services/auth/.env
     environment:
       KAFKAJS_NO_PARTITIONER_WARNING: 1
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/auth/src:/usr/src/app/services/auth/src/
       - ./services/auth/package.json:/usr/src/app/services/auth/package.json
     depends_on:
@@ -57,11 +59,12 @@ services:
       context: .
       dockerfile: services/orchestration/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-orchestration
     env_file:
       - services/orchestration/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/orchestration/src:/usr/src/app/services/orchestration/src/
       - ./services/orchestration/package.json:/usr/src/app/services/orchestration/package.json
     depends_on:
@@ -84,11 +87,12 @@ services:
       context: .
       dockerfile: services/remy/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-remy
     env_file:
       - services/remy/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/remy/src:/usr/src/app/services/remy/src/
       - ./services/remy/package.json:/usr/src/app/services/remy/package.json
       - ./services/remy/jest.config.js:/usr/src/app/services/remy/jest.config.js
@@ -111,11 +115,12 @@ services:
       context: .
       dockerfile: services/profile/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-profile
     env_file:
       - services/profile/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/profile/src:/usr/src/app/services/profile/src/
       - ./services/profile/package.json:/usr/src/app/services/profile/package.json
     depends_on:
@@ -138,11 +143,12 @@ services:
       context: .
       dockerfile: services/gusteau/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-gusteau
     env_file:
       - services/gusteau/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/gusteau/src:/usr/src/app/services/gusteau/src/
       - ./services/gusteau/package.json:/usr/src/app/services/gusteau/package.json
     depends_on:
@@ -167,11 +173,12 @@ services:
       context: .
       dockerfile: services/streaming/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-streaming
     env_file:
       - services/streaming/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/streaming/src:/usr/src/app/services/streaming/src/
       - ./services/streaming/package.json:/usr/src/app/services/streaming/package.json
     depends_on:
@@ -196,11 +203,12 @@ services:
       context: .
       dockerfile: services/speech-to-text/Dockerfile
       target: dev
+      secrets:
+        - gh_token
     container_name: lenvora-speech-to-text
     env_file:
       - services/speech-to-text/.env
     volumes:
-      - ./shared:/usr/src/app/shared
       - ./services/speech-to-text/src:/usr/src/app/services/speech-to-text/src/
       - ./services/speech-to-text/package.json:/usr/src/app/services/speech-to-text/package.json
     depends_on:
@@ -328,3 +336,7 @@ volumes:
 networks:
   backend:
     driver: bridge
+
+secrets:
+  gh_token:
+    environment: GH_TOKEN
