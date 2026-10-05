@@ -93,8 +93,9 @@ services:
     volumes:
       - ./shared:/usr/src/app/shared
       - ./services/remy/src:/usr/src/app/services/remy/src/
-      - ./services/remy/__tests__:/usr/src/app/services/remy/__tests__/
       - ./services/remy/package.json:/usr/src/app/services/remy/package.json
+      - ./services/remy/jest.config.js:/usr/src/app/services/remy/jest.config.js
+      - ./services/remy/jest.setup.ts:/usr/src/app/services/remy/jest.setup.ts
     depends_on:
       pgbouncer:
         condition: service_healthy

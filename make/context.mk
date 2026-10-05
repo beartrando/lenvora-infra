@@ -21,6 +21,22 @@ context-init:
 			done \
 		' sh {} +
 
+context-apply:
+	@printf "WARNING: This will overwrite CONTEXT.md files in the project. Continue? [y/N] "; \
+	read answer; \
+	case "$$answer" in \
+		y|Y|yes|YES) ;; \
+		*) echo "Aborted."; exit 1 ;; \
+	esac
+	@find $(CONTEXT_DIR) -type f -name 'CONTEXT.md' \
+		-exec sh -c ' \
+			for file do \
+				target="$${file#$(CONTEXT_DIR)/}"; \
+				mkdir -p "$$(dirname "$$target")"; \
+				cp "$$file" "$$target"; \
+			done \
+		' sh {} +
+
 context-capture:
 	@find . \
 		$(foreach dir,$(EXCLUDED_DIRS),-path './$(dir)' -prune -o) \
