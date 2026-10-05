@@ -1,3 +1,3 @@
 *.tsbuildinfo
 
-**/CONTEXT.md
+/CONTEXT/
