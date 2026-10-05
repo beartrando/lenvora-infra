@@ -101,7 +101,7 @@ git-push-all:
 git-pull-all:
 	@failed=0; \
 	echo "\033[1;34m[*] Checking monorepo...\033[0m"; \
-	if [ -n "$$(git status)" ]; then \
+	if [ -n "$$(git status --porcelain --ignore-submodules=all)" ]; then \
 		echo "\033[0;31m[✗] Monorepo has uncommitted changes\033[0m"; \
 		failed=1; \
 	else \
@@ -111,36 +111,32 @@ git-pull-all:
 	for dir in $(GIT_SERVICES); do \
 		echo "\033[1;34m[*] Checking $$dir...\033[0m"; \
 		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
-		if [ ! -e "$$SERVICE_PATH/.git" ]; then \
+		if ! git -C "$$SERVICE_PATH" rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
 			echo "\033[0;31m[!] $$dir — not a git repo\033[0m"; \
 			failed=1; \
 			continue; \
 		fi; \
-		cd "$$SERVICE_PATH"; \
-		if [ -n "$$(git status --porcelain)" ]; then \
+		if [ -n "$$(git -C "$$SERVICE_PATH" status --porcelain)" ]; then \
 			echo "\033[0;31m[✗] $$dir has uncommitted changes\033[0m"; \
 			failed=1; \
 		else \
 			echo "\033[0;32m[✓] $$dir is clean\033[0m"; \
 		fi; \
-		cd - > /dev/null; \
 	done; \
 	\
 	for dir in $(GIT_EXTRA_REPOS); do \
 		echo "\033[1;34m[*] Checking $$dir...\033[0m"; \
-		if [ ! -e "$$dir/.git" ]; then \
+		if ! git -C "$$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
 			echo "\033[0;31m[!] $$dir — not a git repo\033[0m"; \
 			failed=1; \
 			continue; \
 		fi; \
-		cd "$$dir"; \
-		if [ -n "$$(git status --porcelain)" ]; then \
+		if [ -n "$$(git -C "$$dir" status --porcelain)" ]; then \
 			echo "\033[0;31m[✗] $$dir has uncommitted changes\033[0m"; \
 			failed=1; \
 		else \
 			echo "\033[0;32m[✓] $$dir is clean\033[0m"; \
 		fi; \
-		cd - > /dev/null; \
 	done; \
 	\
 	if [ "$$failed" -ne 0 ]; then \
@@ -156,18 +152,15 @@ git-pull-all:
 	for dir in $(GIT_SERVICES); do \
 		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
 		echo "\033[1;34m[*] Pulling $$dir...\033[0m"; \
-		cd "$$SERVICE_PATH"; \
-		git checkout dev && git pull origin dev || exit 1; \
-		cd - > /dev/null; \
+		git -C "$$SERVICE_PATH" checkout dev && \
+		git -C "$$SERVICE_PATH" pull origin dev || exit 1; \
 	done; \
 	\
 	for dir in $(GIT_EXTRA_REPOS); do \
 		echo "\033[1;34m[*] Pulling $$dir...\033[0m"; \
-		cd "$$dir"; \
-		git checkout dev && git pull origin dev || exit 1; \
-		cd - > /dev/null; \
+		git -C "$$dir" checkout dev && \
+		git -C "$$dir" pull origin dev || exit 1; \
 	done; \
 	\
 	echo "\033[0;32m[✓] All repositories pulled successfully.\033[0m"
-
 
