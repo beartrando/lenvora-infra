@@ -13,7 +13,11 @@ context-init:
 		echo "context-init is allowed only for initial setup."; \
 		exit 1; \
 	fi
-	@cp -R $(CONTEXT_DIR)/. .
+	@find $(CONTEXT_DIR) -type d -name '$(CONTEXT_NAME)' -print | while read -r dir; do \
+		target="$${dir#$(CONTEXT_DIR)/}"; \
+		mkdir -p "$$(dirname "$$target")"; \
+		cp -R "$$dir" "$$target"; \
+	done
 
 context-apply:
 	@printf "WARNING: This will overwrite CONTEXT directories in the project. Continue? [y/N] "; \
