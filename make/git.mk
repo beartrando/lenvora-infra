@@ -97,3 +97,77 @@ git-push-all:
 	@if [ "$(bip)" != "no" ]; then \
 		$(MAKE) bip; \
 	fi
+
+git-pull-all:
+	@failed=0; \
+	echo "\033[1;34m[*] Checking monorepo...\033[0m"; \
+	if [ -n "$$(git status --porcelain)" ]; then \
+		echo "\033[0;31m[✗] Monorepo has uncommitted changes\033[0m"; \
+		failed=1; \
+	else \
+		echo "\033[0;32m[✓] Monorepo is clean\033[0m"; \
+	fi; \
+	\
+	for dir in $(GIT_SERVICES); do \
+		echo "\033[1;34m[*] Checking $$dir...\033[0m"; \
+		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
+		if [ ! -e "$$SERVICE_PATH/.git" ]; then \
+			echo "\033[0;31m[!] $$dir — not a git repo\033[0m"; \
+			failed=1; \
+			continue; \
+		fi; \
+		cd "$$SERVICE_PATH"; \
+		if [ -n "$$(git status --porcelain)" ]; then \
+			echo "\033[0;31m[✗] $$dir has uncommitted changes\033[0m"; \
+			failed=1; \
+		else \
+			echo "\033[0;32m[✓] $$dir is clean\033[0m"; \
+		fi; \
+		cd - > /dev/null; \
+	done; \
+	\
+	for dir in $(GIT_EXTRA_REPOS); do \
+		echo "\033[1;34m[*] Checking $$dir...\033[0m"; \
+		if [ ! -e "$$dir/.git" ]; then \
+			echo "\033[0;31m[!] $$dir — not a git repo\033[0m"; \
+			failed=1; \
+			continue; \
+		fi; \
+		cd "$$dir"; \
+		if [ -n "$$(git status --porcelain)" ]; then \
+			echo "\033[0;31m[✗] $$dir has uncommitted changes\033[0m"; \
+			failed=1; \
+		else \
+			echo "\033[0;32m[✓] $$dir is clean\033[0m"; \
+		fi; \
+		cd - > /dev/null; \
+	done; \
+	\
+	if [ "$$failed" -ne 0 ]; then \
+		echo "\033[0;31m[✗] Pull aborted — some repositories have changes.\033[0m"; \
+		exit 1; \
+	fi; \
+	\
+	echo "\033[1;34m[*] All repositories are clean. Pulling dev...\033[0m"; \
+	\
+	echo "\033[1;34m[*] Pulling monorepo...\033[0m"; \
+	git checkout dev && git pull origin dev || exit 1; \
+	\
+	for dir in $(GIT_SERVICES); do \
+		SERVICE_PATH="$(SERVICE_DIR)/$$dir"; \
+		echo "\033[1;34m[*] Pulling $$dir...\033[0m"; \
+		cd "$$SERVICE_PATH"; \
+		git checkout dev && git pull origin dev || exit 1; \
+		cd - > /dev/null; \
+	done; \
+	\
+	for dir in $(GIT_EXTRA_REPOS); do \
+		echo "\033[1;34m[*] Pulling $$dir...\033[0m"; \
+		cd "$$dir"; \
+		git checkout dev && git pull origin dev || exit 1; \
+		cd - > /dev/null; \
+	done; \
+	\
+	echo "\033[0;32m[✓] All repositories pulled successfully.\033[0m"
+
+
