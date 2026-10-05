@@ -101,7 +101,7 @@ git-push-all:
 git-pull-all:
 	@failed=0; \
 	echo "\033[1;34m[*] Checking monorepo...\033[0m"; \
-	if [ -n "$$(git status --porcelain)" ]; then \
+	if [ -n "$$(git status)" ]; then \
 		echo "\033[0;31m[✗] Monorepo has uncommitted changes\033[0m"; \
 		failed=1; \
 	else \
