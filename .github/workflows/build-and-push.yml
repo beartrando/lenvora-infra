@@ -34,6 +34,7 @@ jobs:
       - name: Checkout monorepo
         uses: actions/checkout@v5
         with:
+          ref: ${{ github.event.client_payload.branch }}
           submodules: recursive
           fetch-depth: 0
           token: ${{ secrets.GH_PAT }}
