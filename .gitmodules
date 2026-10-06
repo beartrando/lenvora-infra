@@ -31,6 +31,9 @@
 [submodule "context"]
     path = context
     url = git@github.com:beartrando/lenvora-context.git
+[submodule "wiki"]
+    path = wiki
+    url = git@github.com:beartrando/lenvora-wiki.git
 [submodule "shared/logger"]
     path = shared/logger
     url = git@github.com:beartrando/logger.git
