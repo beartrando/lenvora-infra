@@ -5,6 +5,13 @@ settings:
   excludeLinksFromLockfile: false
   injectWorkspacePackages: true
 
+overrides:
+  '@shared/logger': workspace:*
+  '@shared/errors': workspace:*
+  '@shared/kafka-manager': workspace:*
+  '@shared/grpc-client-manager': workspace:*
+  '@shared/pg-boss-manager': workspace:*
+
 importers:
 
   .:
@@ -28,20 +35,20 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/grpc-client-manager':
-        specifier: git+https://github.com/beartrando/grpc-client-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160
+        specifier: workspace:*
+        version: link:../../shared/grpc-client-manager
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -113,14 +120,14 @@ importers:
         specifier: ^1.14.3
         version: 1.14.4
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/grpc-client-manager':
-        specifier: git+https://github.com/beartrando/grpc-client-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160
+        specifier: workspace:*
+        version: link:../../shared/grpc-client-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -207,17 +214,17 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -301,20 +308,20 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/grpc-client-manager':
-        specifier: git+https://github.com/beartrando/grpc-client-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160
+        specifier: workspace:*
+        version: link:../../shared/grpc-client-manager
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -395,20 +402,20 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/grpc-client-manager':
-        specifier: git+https://github.com/beartrando/grpc-client-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160
+        specifier: workspace:*
+        version: link:../../shared/grpc-client-manager
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -477,17 +484,17 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -574,17 +581,17 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -668,20 +675,20 @@ importers:
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@6.0.3))(typescript@6.0.3)
       '@shared/errors':
-        specifier: git+https://github.com/beartrando/errors.git#v1.0.0
-        version: git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9
+        specifier: workspace:*
+        version: link:../../shared/errors
       '@shared/grpc-client-manager':
-        specifier: git+https://github.com/beartrando/grpc-client-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160
+        specifier: workspace:*
+        version: link:../../shared/grpc-client-manager
       '@shared/kafka-manager':
-        specifier: git+https://github.com/beartrando/kafka-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
+        specifier: workspace:*
+        version: link:../../shared/kafka-manager
       '@shared/logger':
-        specifier: git+https://github.com/beartrando/logger.git#v1.0.0
-        version: git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
+        specifier: workspace:*
+        version: link:../../shared/logger
       '@shared/pg-boss-manager':
-        specifier: git+https://github.com/beartrando/pg-boss-manager.git#v1.0.0
-        version: git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04
+        specifier: workspace:*
+        version: link:../../shared/pg-boss-manager
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -761,6 +768,73 @@ importers:
       typescript:
         specifier: ^6.0.2
         version: 6.0.3
+
+  shared/errors:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^2.11.0
+        version: 2.12.1
+    devDependencies:
+      ts-proto:
+        specifier: ^2.11.6
+        version: 2.11.10
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  shared/grpc-client-manager:
+    dependencies:
+      '@grpc/grpc-js':
+        specifier: ^1.14.3
+        version: 1.14.4
+      '@shared/logger':
+        specifier: workspace:*
+        version: link:../logger
+    devDependencies:
+      '@types/node':
+        specifier: ^24.12.0
+        version: 24.13.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  shared/kafka-manager:
+    dependencies:
+      '@shared/logger':
+        specifier: workspace:*
+        version: link:../logger
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  shared/logger:
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  shared/pg-boss-manager:
+    dependencies:
+      '@shared/kafka-manager':
+        specifier: workspace:*
+        version: link:../kafka-manager
+      '@shared/logger':
+        specifier: workspace:*
+        version: link:../logger
+      pg-boss:
+        specifier: ^12.15.0
+        version: 12.24.1
+    devDependencies:
+      '@types/node':
+        specifier: ^24.12.0
+        version: 24.13.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -1162,26 +1236,6 @@ packages:
 
   '@protobufjs/utf8@1.1.1':
     resolution: {integrity: sha512-oOAWABowe8EAbMyWKM0tYDKi8Yaox52D+HWZhAIJqQXbqe0xI/GV7FhLWqlEKreMkfDjshR5FKgi3mnle0h6Eg==}
-
-  '@shared/errors@git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9':
-    resolution: {commit: f94c6f7a741d3564b58a4201a27e630c946c47e9, repo: https://github.com/beartrando/errors.git, type: git}
-    version: 1.0.0
-
-  '@shared/grpc-client-manager@git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160':
-    resolution: {commit: ef5a6bc63f1a463f42b6520f167d40a918182160, repo: https://github.com/beartrando/grpc-client-manager.git, type: git}
-    version: 1.0.0
-
-  '@shared/kafka-manager@git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d':
-    resolution: {commit: e3962d2a6b9a3b06b846c71820ddc1cd2d68554d, repo: https://github.com/beartrando/kafka-manager.git, type: git}
-    version: 1.0.0
-
-  '@shared/logger@git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0':
-    resolution: {commit: 7d37d0e265357b7939f9763066d5a5ac0982a0b0, repo: https://github.com/beartrando/logger.git, type: git}
-    version: 1.0.0
-
-  '@shared/pg-boss-manager@git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04':
-    resolution: {commit: 953c0951def48cf8568a9dbf1583f4c4c2852d04, repo: https://github.com/beartrando/pg-boss-manager.git, type: git}
-    version: 1.0.0
 
   '@sinclair/typebox@0.34.49':
     resolution: {integrity: sha512-brySQQs7Jtn0joV8Xh9ZV/hZb9Ozb0pmazDIASBkYKCjXrXU3mpcFahmK/z4YDhGkQvP9mWJbVyahdtU5wQA+A==}
@@ -3117,6 +3171,11 @@ packages:
     resolution: {integrity: sha512-faYHw0anBbc/kWF3zFTEnxSFOAGUX9GFbOBthvDdLsIlEoWOFOtS0zgCiQYwIskL9iGXZL3kAXD8OoZ4GmMATA==}
     engines: {node: '>= 18'}
 
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
@@ -3988,30 +4047,6 @@ snapshots:
   '@protobufjs/pool@1.1.0': {}
 
   '@protobufjs/utf8@1.1.1': {}
-
-  '@shared/errors@git+https://github.com/beartrando/errors.git#f94c6f7a741d3564b58a4201a27e630c946c47e9':
-    dependencies:
-      '@bufbuild/protobuf': 2.12.1
-
-  '@shared/grpc-client-manager@git+https://github.com/beartrando/grpc-client-manager.git#ef5a6bc63f1a463f42b6520f167d40a918182160':
-    dependencies:
-      '@grpc/grpc-js': 1.14.4
-      '@shared/logger': git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
-
-  '@shared/kafka-manager@git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d':
-    dependencies:
-      '@shared/logger': git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
-      kafkajs: 2.2.4
-
-  '@shared/logger@git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0': {}
-
-  '@shared/pg-boss-manager@git+https://github.com/beartrando/pg-boss-manager.git#953c0951def48cf8568a9dbf1583f4c4c2852d04':
-    dependencies:
-      '@shared/kafka-manager': git+https://github.com/beartrando/kafka-manager.git#e3962d2a6b9a3b06b846c71820ddc1cd2d68554d
-      '@shared/logger': git+https://github.com/beartrando/logger.git#7d37d0e265357b7939f9763066d5a5ac0982a0b0
-      pg-boss: 12.24.1
-    transitivePeerDependencies:
-      - pg-native
 
   '@sinclair/typebox@0.34.49': {}
 
@@ -6392,6 +6427,8 @@ snapshots:
       content-type: 2.0.0
       media-typer: 1.1.0
       mime-types: 3.0.2
+
+  typescript@5.9.3: {}
 
   typescript@6.0.3: {}
 

@@ -1,5 +1,16 @@
 packages:
   - 'services/*'
+  - 'shared/*'
+
+# @shared/* всегда резолвятся как локальные workspace-модули, даже если где-то
+# в пакетах осталась git+https-спецификация (в сабмодулях shared/* свои
+# overrides указывают на GitHub — они здесь игнорируются, читается только корень)
+overrides:
+  '@shared/logger': 'workspace:*'
+  '@shared/errors': 'workspace:*'
+  '@shared/kafka-manager': 'workspace:*'
+  '@shared/grpc-client-manager': 'workspace:*'
+  '@shared/pg-boss-manager': 'workspace:*'
 
 injectWorkspacePackages: true
 
@@ -13,11 +24,6 @@ allowBuilds:
   prisma: true
   protobufjs: true
   unrs-resolver: true
-  "@shared/logger@git+https://github.com/beartrando/logger.git": true
-  "@shared/errors@git+https://github.com/beartrando/errors.git": true
-  "@shared/kafka-manager@git+https://github.com/beartrando/kafka-manager.git": true
-  "@shared/grpc-client-manager@git+https://github.com/beartrando/grpc-client-manager.git": true
-  "@shared/pg-boss-manager@git+https://github.com/beartrando/pg-boss-manager.git": true
 
 onlyBuiltDependencies:
   - '@prisma/client'
