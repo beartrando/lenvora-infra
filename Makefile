@@ -133,8 +133,6 @@ seed:
 
 
 
-SHARED_ERRORS_CONTRACTS_PATH=shared/errors/src/contracts/proto
-
 proto-generate:
 	@echo '🚀 Proto generate...'
 
@@ -143,9 +141,6 @@ proto-generate:
 		rm -rf $(SERVICE_DIR)/$$dir/${NODE_PROTO_PATH}; \
 		mkdir -p $(SERVICE_DIR)/$$dir/${NODE_PROTO_PATH}; \
 	done
-
-	rm -rf $(SHARED_ERRORS_CONTRACTS_PATH)
-	mkdir -p $(SHARED_ERRORS_CONTRACTS_PATH)
 
 	@for dir in $(FLUTTER_SERVICES); do \
 		echo "\033[1;33m[*] Checking $$dir...\033[0m"; \
@@ -168,14 +163,6 @@ proto-generate:
 		echo "\033[1;32m[✓] $$dir done\033[0m"; \
 	done
 
-	echo "\033[1;34m[>] Generating proto for @shared/errors...\033[0m";
-	protoc \
-		--plugin=./node_modules/.bin/protoc-gen-ts_proto \
-		--ts_proto_out=$(SHARED_ERRORS_CONTRACTS_PATH) \
-		--ts_proto_opt=esModuleInterop=true,outputServices=none \
-		--proto_path=./proto \
-		./proto/common/error.proto;
-	echo "\033[1;32m[✓] @shared/errors done\033[0m";
 	@if [ "$(bip)" != "no" ]; then \
 		$(MAKE) bip; \
 	fi
