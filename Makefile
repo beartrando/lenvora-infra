@@ -1,6 +1,5 @@
 include make/parameters.mk
 include make/kafka.mk
-include make/context.mk
 include make/git.mk
 
 NODE_BIN=./node_modules/.bin
@@ -248,6 +247,9 @@ fix-eof:
 			for f do \
 				if [ -s "$$f" ] && [ "$$(tail -c 1 "$$f" | od -An -t x1 | tr -d " ")" != "0a" ]; then \
 					printf "\n" >> "$$f"; \
+					echo "$$f"; \
+				elif [ -s "$$f" ] && [ "$$(tail -c 2 "$$f" | od -An -t x1 | tr -d " ")" = "0a0a" ]; then \
+					perl -0pi -e "s/\\n+$$/\\n/" "$$f"; \
 					echo "$$f"; \
 				fi; \
 			done \
