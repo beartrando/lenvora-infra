@@ -42,8 +42,8 @@ jobs:
         run: |
           cd proto
           git fetch origin
-          git checkout master
-          git pull origin master
+          git checkout ${{ github.event.client_payload.branch }}
+          git pull origin ${{ github.event.client_payload.branch }}
 
       - name: Checkout service submodule branch
         run: |
@@ -102,6 +102,7 @@ jobs:
 
 
   trigger-deploy:
+    if: github.event.client_payload.branch != 'dev'
     needs: build-and-push
     environment: ${{ github.event.client_payload.branch }}
     runs-on: ubuntu-latest
