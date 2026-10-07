@@ -1,5 +1,5 @@
 # репозитории вне services/*, но внутри монорепы (сабмодули)
-GIT_EXTRA_REPOS := proto context \
+GIT_EXTRA_REPOS := proto context wiki \
 	shared/logger \
 	shared/errors \
 	shared/kafka-manager \
