@@ -56,7 +56,6 @@ jobs:
         run: |
           docker build \
             --target prod \
-            --secret id=gh_token,env=GH_PAT \
             --build-arg VERSION=${{ github.event.client_payload.version }} \
             -t $REGISTRY/${{ github.event.client_payload.repo }}/service:${{ github.event.client_payload.version }} \
             -f services/${{ github.event.client_payload.service }}/Dockerfile .
@@ -72,7 +71,6 @@ jobs:
 
           docker build \
             --target predeploy \
-            --secret id=gh_token,env=GH_PAT \
             --build-arg VERSION=${{ github.event.client_payload.version }} \
             -t $REGISTRY/${{ github.event.client_payload.repo }}/predeploy:${{ github.event.client_payload.version }} \
             -f services/${{ github.event.client_payload.service }}/Dockerfile .
