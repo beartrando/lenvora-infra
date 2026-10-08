@@ -1,11 +1,3 @@
-# репозитории вне services/*, но внутри монорепы (сабмодули)
-GIT_EXTRA_REPOS := proto context \
-	shared/logger \
-	shared/errors \
-	shared/kafka-manager \
-	shared/grpc-client-manager \
-	shared/pg-boss-manager
-
 git-commit-and-push-all:
 	@echo "🚀 Commit all repos..."
 	@make git-commit-all bip=no
