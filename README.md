@@ -1,2 +1,4 @@
-./wiki/README.md
+./docs/wiki/README.md
+./docs/workflow/README.md
+
 
