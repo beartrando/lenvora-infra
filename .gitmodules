@@ -38,8 +38,8 @@
     path = docs/workflow
     url = git@github.com:beartrando/lenvora-workflow.git
 [submodule "make"]
-    path = docs/make
-    url = git@github.com:beartrando/make.git
+	path = make
+	url = git@github.com:beartrando/make
 [submodule "shared/logger"]
     path = shared/logger
     url = git@github.com:beartrando/logger.git
