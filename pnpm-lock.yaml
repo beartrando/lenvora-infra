@@ -6,11 +6,14 @@ settings:
   injectWorkspacePackages: true
 
 overrides:
-  '@shared/logger': workspace:*
+  '@shared/cache-store': workspace:*
   '@shared/errors': workspace:*
-  '@shared/kafka-manager': workspace:*
   '@shared/grpc-client-manager': workspace:*
+  '@shared/kafka-manager': workspace:*
+  '@shared/logger': workspace:*
   '@shared/pg-boss-manager': workspace:*
+  '@shared/state-store': workspace:*
+  '@shared/timer': workspace:*
 
 importers:
 
