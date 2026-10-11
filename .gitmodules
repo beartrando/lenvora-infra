@@ -31,3 +31,6 @@
 [submodule "context"]
     path = context
     url = git@github.com:beartrando/lenvora-context.git
+[submodule "make"]
+	path = make
+	url = git@github.com:beartrando/make.git
