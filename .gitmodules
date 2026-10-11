@@ -37,9 +37,6 @@
 [submodule "workflow"]
     path = docs/workflow
     url = git@github.com:beartrando/lenvora-workflow.git
-[submodule "make"]
-	path = make
-	url = git@github.com:beartrando/make
 [submodule "shared/logger"]
     path = shared/logger
     url = git@github.com:beartrando/logger.git
@@ -64,3 +61,8 @@
 [submodule "shared/state-store"]
     path = shared/state-store
     url = git@github.com:beartrando/state-store.git
+[submodule "make"]
+    path = make
+    url = git@github.com:beartrando/make.git
+
+
