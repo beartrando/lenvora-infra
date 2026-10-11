@@ -63,3 +63,6 @@
     url = git@github.com:beartrando/make.git
 
 
+[submodule "docs/context"]
+	path = docs/context
+	url = git@github.com:beartrando/lenvora-context.git
