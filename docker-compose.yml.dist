@@ -2,17 +2,17 @@ services:
   gateway:
     build:
       context: .
-      dockerfile: services/gateway/Dockerfile
+      dockerfile: services/server/gateway/Dockerfile
       target: dev
     container_name: lenvora-gateway
     env_file:
-      - services/gateway/.env
+      - services/server/gateway/.env
     ports:
       - "9110:9090"
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/gateway/src:/usr/src/app/services/gateway/src/
-      - ./services/gateway/package.json:/usr/src/app/services/gateway/package.json
+      - ./services/server/gateway/src:/usr/src/app/services/server/gateway/src/
+      - ./services/server/gateway/package.json:/usr/src/app/services/server/gateway/package.json
     command: pnpm dlx turbo run dev --parallel --filter gateway
     networks:
       - backend
@@ -26,17 +26,17 @@ services:
   auth:
     build:
       context: .
-      dockerfile: services/auth/Dockerfile
+      dockerfile: services/server/auth/Dockerfile
       target: dev
     container_name: lenvora-auth
     env_file:
-      - services/auth/.env
+      - services/server/auth/.env
     environment:
       KAFKAJS_NO_PARTITIONER_WARNING: 1
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/auth/src:/usr/src/app/services/auth/src/
-      - ./services/auth/package.json:/usr/src/app/services/auth/package.json
+      - ./services/server/auth/src:/usr/src/app/services/server/auth/src/
+      - ./services/server/auth/package.json:/usr/src/app/services/server/auth/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -55,15 +55,15 @@ services:
   orchestration:
     build:
       context: .
-      dockerfile: services/orchestration/Dockerfile
+      dockerfile: services/server/orchestration/Dockerfile
       target: dev
     container_name: lenvora-orchestration
     env_file:
-      - services/orchestration/.env
+      - services/server/orchestration/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/orchestration/src:/usr/src/app/services/orchestration/src/
-      - ./services/orchestration/package.json:/usr/src/app/services/orchestration/package.json
+      - ./services/server/orchestration/src:/usr/src/app/services/server/orchestration/src/
+      - ./services/server/orchestration/package.json:/usr/src/app/services/server/orchestration/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -82,17 +82,17 @@ services:
   remy:
     build:
       context: .
-      dockerfile: services/remy/Dockerfile
+      dockerfile: services/server/remy/Dockerfile
       target: dev
     container_name: lenvora-remy
     env_file:
-      - services/remy/.env
+      - services/server/remy/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/remy/src:/usr/src/app/services/remy/src/
-      - ./services/remy/package.json:/usr/src/app/services/remy/package.json
-      - ./services/remy/jest.config.js:/usr/src/app/services/remy/jest.config.js
-      - ./services/remy/jest.setup.ts:/usr/src/app/services/remy/jest.setup.ts
+      - ./services/server/remy/src:/usr/src/app/services/server/remy/src/
+      - ./services/server/remy/package.json:/usr/src/app/services/server/remy/package.json
+      - ./services/server/remy/jest.config.js:/usr/src/app/services/server/remy/jest.config.js
+      - ./services/server/remy/jest.setup.ts:/usr/src/app/services/server/remy/jest.setup.ts
     depends_on:
       pgbouncer:
         condition: service_healthy
@@ -109,15 +109,15 @@ services:
   profile:
     build:
       context: .
-      dockerfile: services/profile/Dockerfile
+      dockerfile: services/server/profile/Dockerfile
       target: dev
     container_name: lenvora-profile
     env_file:
-      - services/profile/.env
+      - services/server/profile/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/profile/src:/usr/src/app/services/profile/src/
-      - ./services/profile/package.json:/usr/src/app/services/profile/package.json
+      - ./services/server/profile/src:/usr/src/app/services/server/profile/src/
+      - ./services/server/profile/package.json:/usr/src/app/services/server/profile/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -136,15 +136,15 @@ services:
   gusteau:
     build:
       context: .
-      dockerfile: services/gusteau/Dockerfile
+      dockerfile: services/server/gusteau/Dockerfile
       target: dev
     container_name: lenvora-gusteau
     env_file:
-      - services/gusteau/.env
+      - services/server/gusteau/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/gusteau/src:/usr/src/app/services/gusteau/src/
-      - ./services/gusteau/package.json:/usr/src/app/services/gusteau/package.json
+      - ./services/server/gusteau/src:/usr/src/app/services/server/gusteau/src/
+      - ./services/server/gusteau/package.json:/usr/src/app/services/server/gusteau/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -165,17 +165,17 @@ services:
   streaming:
     build:
       context: .
-      dockerfile: services/streaming/Dockerfile
+      dockerfile: services/server/streaming/Dockerfile
       target: dev
     container_name: lenvora-streaming
     env_file:
-      - services/streaming/.env
+      - services/server/streaming/.env
     ports:
       - 8090:8080
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/streaming/src:/usr/src/app/services/streaming/src/
-      - ./services/streaming/package.json:/usr/src/app/services/streaming/package.json
+      - ./services/server/streaming/src:/usr/src/app/services/server/streaming/src/
+      - ./services/server/streaming/package.json:/usr/src/app/services/server/streaming/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -196,15 +196,15 @@ services:
   speech-to-text:
     build:
       context: .
-      dockerfile: services/speech-to-text/Dockerfile
+      dockerfile: services/server/speech-to-text/Dockerfile
       target: dev
     container_name: lenvora-speech-to-text
     env_file:
-      - services/speech-to-text/.env
+      - services/server/speech-to-text/.env
     volumes:
       - ./shared:/usr/src/app/shared
-      - ./services/speech-to-text/src:/usr/src/app/services/speech-to-text/src/
-      - ./services/speech-to-text/package.json:/usr/src/app/services/speech-to-text/package.json
+      - ./services/server/speech-to-text/src:/usr/src/app/services/server/speech-to-text/src/
+      - ./services/server/speech-to-text/package.json:/usr/src/app/services/server/speech-to-text/package.json
     depends_on:
       kafka:
         condition: service_healthy
@@ -280,7 +280,7 @@ services:
  #     - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    # - ./services/postgres/data:/var/lib/postgresql/data
+    # - ./services/infra/postgres/data:/var/lib/postgresql/data
     restart: always
     networks:
       - backend
@@ -295,8 +295,8 @@ services:
     image: edoburu/pgbouncer
     container_name: lenvora-pgbouncer
     volumes:
-      - ./services/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
-      - ./services/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./services/infra/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
+      - ./services/infra/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
     tmpfs:
       - /var/run/pgbouncer:uid=70,gid=70,mode=0755
     depends_on:
