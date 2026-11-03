@@ -16,6 +16,9 @@
 [submodule "services/server/streaming"]
     path = services/server/streaming
     url = git@github.com:beartrando/tic-tac-toe-streaming.git
+[submodule "services/server/speech-to-text"]
+    path = services/server/speech-to-text
+    url = git@github.com:beartrando/lenvora-speech-to-text.git
 
 
 [submodule "services/server/gusteau"]
