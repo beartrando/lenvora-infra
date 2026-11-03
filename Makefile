@@ -1,10 +1,7 @@
-include make/main.mk
+include tools/make/main.mk
 
-GIT_SERVICES     := auth front gateway gusteau orchestration profile remy speech-to-text streaming
-NODE_SERVICES    := auth       gateway gusteau orchestration profile remy speech-to-text streaming
-PRISMA_SERVICES  := auth               gusteau orchestration profile remy speech-to-text streaming
-FLUTTER_SERVICES :=      front
+FLUTTER_SERVICES := front
 
-GIT_BASE := services/auth services/gateway services/profile
+GIT_BASE := services/server/auth services/server/gateway services/server/profile
 
 PROJECT_PREFIX := lenvora
