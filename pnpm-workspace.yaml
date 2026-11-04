@@ -1,5 +1,5 @@
 packages:
-  - 'services/*'
+  - 'services/*/*'
   - 'shared/*'
 
 # @shared/* всегда резолвятся как локальные workspace-модули, даже если где-то
@@ -8,6 +8,8 @@ packages:
 overrides:
   '@shared/cache-store': 'workspace:*'
   '@shared/errors': 'workspace:*'
+  '@shared/otel': 'workspace:*'
+  '@shared/persistent-logger': 'workspace:*'
   '@shared/grpc-client-manager': 'workspace:*'
   '@shared/kafka-manager': 'workspace:*'
   '@shared/logger': 'workspace:*'
