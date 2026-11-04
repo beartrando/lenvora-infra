@@ -222,6 +222,35 @@ services:
       retries: 10
       start_period: 20s
 
+  devorc:
+    build:
+      context: .
+      dockerfile: services/infra/devorc/Dockerfile
+      target: dev
+    container_name: ttt-devorc
+    user: "1000:1000"
+    env_file:
+      - services/infra/devorc/.env
+    ports:
+      - "9091:9090"
+    environment:
+      GH_TOKEN: ${GH_TOKEN}
+      HOME: /home/node
+      CI: "true"
+    volumes:
+      - ./:/usr/src/app
+      - ${HOME}/.ssh:/home/node/.ssh:ro
+      - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
+    command: pnpm dlx turbo run dev --parallel --filter devorc
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:9090/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: lenvora-kafka-ui
