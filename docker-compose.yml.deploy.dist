@@ -5,8 +5,6 @@ services:
     restart: unless-stopped
     env_file:
       - ./services/.env.gateway
-    ports:
-      - "9090:9090"
     networks:
       - backend
     healthcheck:
