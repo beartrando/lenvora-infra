@@ -8,7 +8,7 @@ services:
     env_file:
       - services/server/gateway/.env
     ports:
-      - "9110:9090"
+      - "9090:9090"
     volumes:
       - ./shared:/usr/src/app/shared
       - ./services/server/gateway/src:/usr/src/app/services/server/gateway/src/
@@ -227,7 +227,7 @@ services:
       context: .
       dockerfile: services/infra/devorc/Dockerfile
       target: dev
-    container_name: ttt-devorc
+    container_name: lenvora-devorc
     user: "1000:1000"
     env_file:
       - services/infra/devorc/.env
