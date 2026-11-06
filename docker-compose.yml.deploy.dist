@@ -164,8 +164,8 @@ services:
     image: provectuslabs/kafka-ui:latest
     container_name: lenvora-kafka-ui
     restart: unless-stopped
-    ports:
-      - "8081:8080"
+#    ports:
+#      - "8083:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
@@ -222,8 +222,8 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_INITDB_ARGS: "--auth-host=md5"
     volumes:
-      - ./services/postgres/data:/var/lib/postgresql/data
-#      - ./services/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./services/infra/postgres/data:/var/lib/postgresql/data
+#      - ./services/infra/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - backend
     healthcheck:
@@ -238,8 +238,8 @@ services:
     container_name: lenvora-pgbouncer
     restart: unless-stopped
     volumes:
-      - ./services/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
-      - ./services/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./services/infra/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
+      - ./services/infra/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
     tmpfs:
       - /var/run/pgbouncer:uid=70,gid=70,mode=0755
     depends_on:
@@ -257,8 +257,8 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
     container_name: lenvora-elasticsearch
-    ports:
-      - "9200:9200"
+#    ports:
+#      - "9201:9200"
     environment:
       discovery.type: single-node
       xpack.security.enabled: "true"
@@ -297,8 +297,8 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:8.15.0
     container_name: lenvora-kibana
-    ports:
-      - "5601:5601"
+ #   ports:
+ #     - "5602:5601"
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ELASTICSEARCH_USERNAME: kibana_system
@@ -344,8 +344,8 @@ services:
     volumes:
       - ./services/infra/observability/grafana/provisioning:/etc/grafana/provisioning
       - grafana_data:/var/lib/grafana
-    ports:
-      - "3000:3000"
+ #   ports:
+ #     - "3001:3000"
     depends_on:
       - tempo
       - prometheus
@@ -365,49 +365,6 @@ services:
       timeout: 5s
       retries: 5
 
-#  mongo:
-#    image: mongo:8
-#    container_name: lenvora-mongo
-#    restart: unless-stopped
-#    ports:
-#      - "27017:27017"
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: mongo
-#      MONGO_INITDB_ROOT_PASSWORD: mongo
-#      MONGO_INITDB_DATABASE: lenvora
-#    volumes:
-#      - mongo_data:/data/db
-#    networks:
-#      - backend
-#    healthcheck:
-#      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 5
-#      start_period: 10s
-#
-#  mailpit:
-#    image: axllent/mailpit
-#    container_name: lenvora-mailpit
-#    restart: unless-stopped
-#    ports:
-#      - 8025:8025cat
-#      - 1025:1025
-#    environment:
-#      MP_WEBROOT : "/mailpit/"
-##      MP_SMTP_AUTH_ACCEPT_ANY: 1
-#      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-#      MP_SMTP_AUTH: "login:pass"
-#      MP_MAX_MESSAGES: 5000
-#    volumes:
-#      - /data
-#    networks:
-#      - backend
-#    healthcheck:
-#      test: ["CMD", "redis-cli", "ping"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
 
 volumes:
   kafka_data:
