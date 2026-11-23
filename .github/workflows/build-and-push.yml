@@ -49,7 +49,7 @@ jobs:
       - name: Update shared folders
         env:
           BRANCH: ${{ github.event.client_payload.branch }}
-          SHARED_MODULES: "logger errors grpc-client-manager kafka-manager pg-boss-manager timer cache-store state-store"
+          SHARED_MODULES: "cache-store errors grpc-client-manager kafka-manager logger otel persistent-logger pg-boss-manager state-store timer"
         run: |
           for dir in $SHARED_MODULES; do
             git -C "shared/$dir" fetch origin
@@ -58,11 +58,32 @@ jobs:
           done
 
       - name: Checkout service submodule branch
+        id: checkout-service
+        env:
+          SERVICE: ${{ github.event.client_payload.service }}
+          BRANCH: ${{ github.event.client_payload.branch }}
         run: |
-          cd services/server/${{ github.event.client_payload.service }}
-          git fetch origin ${{ github.event.client_payload.branch }}
-          git checkout ${{ github.event.client_payload.branch }}
-          git pull origin ${{ github.event.client_payload.branch }}
+          PATH_TO_SUBMODULE=""
+          
+          while read -r key path; do
+            if [ "$(basename "$path")" = "$SERVICE" ]; then
+              PATH_TO_SUBMODULE="$path"
+              break
+            fi
+          done < <(git config -f .gitmodules --get-regexp '^submodule\..*\.path$')
+          
+          if [ -z "$PATH_TO_SUBMODULE" ]; then
+            echo "Submodule not found: $SERVICE"
+            exit 1
+          fi
+          
+          echo "Submodule path: $PATH_TO_SUBMODULE"
+          echo "path=$PATH_TO_SUBMODULE" >> "$GITHUB_OUTPUT"
+          
+          cd "$PATH_TO_SUBMODULE"
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          git pull origin "$BRANCH"
 
       - name: Build Docker image
         run: |
@@ -70,7 +91,7 @@ jobs:
             --target prod \
             --build-arg VERSION=${{ github.event.client_payload.version }} \
             -t $REGISTRY/${{ github.event.client_payload.repo }}/service:${{ github.event.client_payload.version }} \
-            -f services/server/${{ github.event.client_payload.service }}/Dockerfile .
+            -f "${{ steps.checkout-service.outputs.path }}/Dockerfile" .
 
           docker tag ghcr.io/${{ github.event.client_payload.repo }}/service:${{ github.event.client_payload.version }} \
             ghcr.io/${{ github.event.client_payload.repo }}/service:${{ github.event.client_payload.branch }}
@@ -85,7 +106,7 @@ jobs:
             --target predeploy \
             --build-arg VERSION=${{ github.event.client_payload.version }} \
             -t $REGISTRY/${{ github.event.client_payload.repo }}/predeploy:${{ github.event.client_payload.version }} \
-            -f services/server/${{ github.event.client_payload.service }}/Dockerfile .
+            -f "${{ steps.checkout-service.outputs.path }}/Dockerfile" .
 
           docker tag ghcr.io/${{ github.event.client_payload.repo }}/predeploy:${{ github.event.client_payload.version }} \
             ghcr.io/${{ github.event.client_payload.repo }}/predeploy:${{ github.event.client_payload.branch }}
@@ -112,7 +133,7 @@ jobs:
 
 
   trigger-deploy:
-    if: ${{ success() && github.event.client_payload.branch != 'dev' }}
+    if: ${{ success() && github.event.client_payload.branch == 'uat' }}
     needs: build-and-push
     environment: ${{ github.event.client_payload.branch }}
     runs-on: ubuntu-latest

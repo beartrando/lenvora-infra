@@ -20,6 +20,9 @@
     path = services/server/speech-to-text
     url = git@github.com:beartrando/lenvora-speech-to-text.git
 
+[submodule "services/infra/infrastructure-telemetry-mcp"]
+    path = services/infra/infrastructure-telemetry-mcp
+    url = git@github.com:beartrando/tic-tac-toe-infrastructure-telemetry-mcp.git
 
 [submodule "services/server/gusteau"]
     path = services/server/gusteau

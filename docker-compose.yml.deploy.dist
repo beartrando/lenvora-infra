@@ -7,7 +7,6 @@ services:
       - ./services/.env.gateway
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -28,7 +27,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -47,7 +45,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -66,7 +63,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -85,7 +81,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -106,7 +101,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -127,7 +121,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
@@ -148,13 +141,32 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: [ "CMD-SHELL", "wget -q --spider http://127.0.0.1:50051 || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 10
       start_period: 20s
+
+  opentelemetry-collector:
+    image: otel/opentelemetry-collector-contrib:0.112.0
+    container_name: lenvora-opentelemetry-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./services/observability/otel-collector/config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4318:4318"
+    networks:
+      backend:
+        aliases:
+          - tempo
+          - prometheus
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:4318 || exit 0"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   postgres:
     image: postgres:17.6
@@ -170,7 +182,6 @@ services:
 #      - ./services/infra/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -192,7 +203,6 @@ services:
         condition: service_healthy
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -h postgres -p 5432"]
       interval: 10s
@@ -206,7 +216,6 @@ services:
     restart: unless-stopped
     networks:
       - backend
-      - platform_infra
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -217,6 +226,3 @@ services:
 networks:
   backend:
     driver: bridge
-  platform_infra:
-    external: true
-    name: platform_infra
